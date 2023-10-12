@@ -1,13 +1,38 @@
+'use client';
+const useSound = require('use-sound').default;
+import { useSettingsStore, SettingsStore } from './page';
+
 import { SpeakerWaveIcon } from '@heroicons/react/24/solid';
 import { SpeakerXMarkIcon } from '@heroicons/react/24/solid';
+import { Sounds, createSounds } from './audio';
 
-export default function VolumeControl({muted, onToggleMute}: {muted: boolean, onToggleMute: (muted: boolean) => void}) {
+export default function VolumeControl() {
+    const { mute, toggleMute } = useSettingsStore((state: SettingsStore) => ({mute: state.mute, toggleMute: state.toggleMute}));
+    const [ muteSfx, unmuteSfx, muffleSfx, unmuffleSfx ] = createSounds(
+        useSound,
+        [ Sounds.mute, Sounds.unmute, Sounds.muffle, Sounds.unmuffle ]
+    );
+    function doToggleMute() {
+        toggleMute();
+        let music: HTMLAudioElement = document.querySelector('#music')!;
+        if (mute) {
+            unmuffleSfx();
+            unmuteSfx();
+            music.play();
+            music.volume = 0.5;
+        } else {
+            muffleSfx();
+            muteSfx();
+            music.pause();
+        }
+    }
     return (
         <div className="flex gap-2 items-center h-min">
-            <div className="text-base" id="volumeLabel">Audio Isolation: {muted ? 'Engaged' : 'Disengaged'}</div>
-            <div className="cursor-pointer text-sky-800 transition-all hover:scale-110 hover:drop-shadow-sm">
-                <SpeakerWaveIcon id="volumeOnIcon" className={'h-6 w-6' + (muted ? ' hidden' : '')} onClick={() => onToggleMute(!muted)}/>
-                <SpeakerXMarkIcon id="volumeOffIcon" className={'h-6 w-6' + (!muted ? ' hidden' : '')} onClick={() => onToggleMute(!muted)}/>
+            <audio id="music" src="/sounds/floating.mp3" loop></audio>
+            <div className="text-base" id="volumeLabel">Audio Isolation: {mute ? 'Engaged' : 'Disengaged'}</div>
+            <div className="cursor-pointer text-sky-800 hover:text-sky-500 transition-all hover:scale-110 hover:drop-shadow-sm">
+                <SpeakerWaveIcon id="volumeOnIcon" className={'h-6 w-6' + (mute ? ' hidden' : '')} onClick={doToggleMute}/>
+                <SpeakerXMarkIcon id="volumeOffIcon" className={'h-6 w-6' + (!mute ? ' hidden' : '')} onClick={doToggleMute}/>
             </div>
         </div>
     )
