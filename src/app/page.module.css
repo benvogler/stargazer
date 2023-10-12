@@ -78,8 +78,6 @@
 
 .welcomeMessageWrapper {
     position: absolute;
-    top: calc(50% - 100px);
-    left: calc(50% - 200px);
     width: 400px;
     height: 200px;
     display: flex;
@@ -89,6 +87,17 @@
     animation-name: breathe3d;
     animation-duration: 17s;
     animation-iteration-count: infinite;
+}
+
+.closeWelcomeMessage {
+    height: 200px;
+    max-height: 200px;
+    padding: 1em;
+    width: 400px;
+    opacity: 1;
+    animation-delay: 0s;
+    animation-direction: reverse;
+    animation-name: openTerminal;
 }
 
 @keyframes breathe3d {
@@ -114,13 +123,15 @@
         height: 0;
         width: 0;
         max-height: 4px;
-        opacity: 1;
+        opacity: 0;
+        padding: 0;
     }
     50% {
         width: 100%;
         height: 0;
         max-height: 4px;
         opacity: 1;
+        padding: 0 1em;
     }
     100% {
         height: 100%;
