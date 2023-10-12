@@ -32,6 +32,11 @@ const config: Config = {
         { values: theme('textShadow') }
       )
     }),
+    plugin(function({ addBase }) {
+     addBase({
+        'html': { fontSize: "13px" },
+      })
+    }),
   ],
 }
 export default config
