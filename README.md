@@ -1,36 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+View the live demo of this app [here](https://stargazer-seven.vercel.app/).
 
-## Getting Started
+# About
+I've been reading Project Hail Mary by Andy Weir which has me in a sci-fi mood. This app is a vision of an air traffic controller's terminal aboard a starport (Stargazer Station) inside an asteroid.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The inspiration for this has less to do with Project Hail Mary itself (that takes place on a very different kind of spaceship), but rather [Elite: Dangerous](https://www.elitedangerous.com/) by Frontier Developments, and as such credit goes to them for their unique IP which this project draws from. Noteably, the video background and its audio are recorded from within the game, the name Stargazer is an actual [asteroid station](https://www.edsm.net/en/system/stations/id/25525/name/Pleione/details/idS/15823/nameS/Stargazer) in the game, and some of the ideas for the contents of the UI are drawn from mechanics of the game.
