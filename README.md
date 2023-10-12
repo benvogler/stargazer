@@ -13,5 +13,11 @@ The inspiration for this has less to do with Project Hail Mary itself (that take
 Thanks to Braden Deal for the royalty free music
 
 > Music from #Uppbeat (free for Creators!):
+>
 > https://uppbeat.io/t/braden-deal/floating-in-empty-space
+>
 > License code: LEKO0LN2UYKSMWCJ
+
+### Premium Beat
+Thanks to Premium Beat for the royalty free sound effects
+> https://www.premiumbeat.com/

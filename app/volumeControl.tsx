@@ -1,6 +1,6 @@
 'use client';
 const useSound = require('use-sound').default;
-import { useSettingsStore, SettingsStore } from './page';
+import { SettingsStore, useSettingsStore } from './settings.store';
 
 import { SpeakerWaveIcon } from '@heroicons/react/24/solid';
 import { SpeakerXMarkIcon } from '@heroicons/react/24/solid';

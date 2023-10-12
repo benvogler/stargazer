@@ -1,22 +1,12 @@
 'use client';
-import { StoreApi, UseBoundStore, create as createStore } from 'zustand';
 
 import Welcome from './welcome';
 import VolumeControl from './volumeControl';
+import { SettingsStore, useSettingsStore } from './settings.store';
 
 import './globals.css'
 import styles from './page.module.css';
-import { SparklesIcon } from '@heroicons/react/24/outline';
 import Logo from './logo';
-
-export type SettingsStore = {
-    mute: boolean,
-    toggleMute: () => void
-};
-export const useSettingsStore: UseBoundStore<StoreApi<SettingsStore>> = createStore(set => ({
-    mute: true,
-    toggleMute: () => set((state: SettingsStore) => ({ mute: !state.mute }))
-}));
 
 export default function Home() {
     const mute: boolean = useSettingsStore((state: SettingsStore) => state.mute);

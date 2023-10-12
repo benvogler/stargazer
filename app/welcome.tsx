@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 const useSound = require('use-sound').default;
-import { SettingsStore, useSettingsStore } from './page';
+import { SettingsStore, useSettingsStore } from './settings.store';
 
 import styles from './welcome.module.css';
 import { SunIcon, XCircleIcon } from '@heroicons/react/24/outline';
