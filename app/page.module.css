@@ -29,6 +29,9 @@
     min-height: 4px;
     max-height: 4px;
     opacity: 0;
+}
+
+.interface :global {
     animation-name: openTerminal;
     animation-duration: 1s;
     animation-iteration-count: 1;
@@ -37,9 +40,10 @@
     animation-delay: 3s;
 }
 
-.interface > * {
+.interface > * :global {
     animation-name: terminalContents;
-    animation-duration: 1s;
+    animation-duration: 0.5s;
+    animation-delay: 3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
     animation-timing-function: ease-in;
@@ -54,103 +58,11 @@
     width: calc(100vw - 128px);
     left: 64px;
     top: 64px;
+
+}
+
+.interfaceWrapper :global {
     animation-name: breathe3d;
     animation-duration: 20s;
     animation-iteration-count: infinite;
-}
-
-.welcomeMessage {
-    background: rgba(7, 9, 12, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    overflow: hidden;
-    height: 4px;
-    min-height: 4px;
-    max-height: 4px;
-    opacity: 0;
-    cursor: grab;
-    animation-name: openTerminal;
-    animation-duration: 0.65s;
-    animation-iteration-count: 1;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in;
-    animation-delay: 5s;
-}
-
-.welcomeMessageWrapper {
-    position: absolute;
-    width: 400px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: scale(2);
-    animation-name: breathe3d;
-    animation-duration: 17s;
-    animation-iteration-count: infinite;
-}
-
-.closeWelcomeMessage {
-    height: 200px;
-    max-height: 200px;
-    padding: 1em;
-    width: 400px;
-    opacity: 1;
-    animation-delay: 0s;
-    animation-direction: reverse;
-    animation-name: openTerminal;
-}
-
-@keyframes breathe3d {
-    0% {
-        transform: rotate3d(0, 0, 0, 0) scale(1);
-    }
-    25% {
-        transform: rotate3d(1, 5, 0, 1deg) scale(1.01) translate3d(1px, 6px, 0);
-    }
-    50% {
-        transform: rotate3d(0, 0, 0, 0) scale(1);
-    }
-    75% {
-        transform: rotate3d(1, 5, 0, -1deg) scale(1.01) translate3d(-1px, 3px, 0);
-    }
-    100% {
-        transform: rotate3d(0, 0, 0, 0) scale(1);
-    }
-}
-
-@keyframes openTerminal {
-    0% {
-        height: 0;
-        width: 0;
-        max-height: 4px;
-        opacity: 0;
-        padding: 0;
-    }
-    50% {
-        width: 100%;
-        height: 0;
-        max-height: 4px;
-        opacity: 1;
-        padding: 0 1em;
-    }
-    100% {
-        height: 100%;
-        max-height: 100%;
-        width: 100%;
-        padding: 1em;
-        opacity: 1;
-    }
-}
-
-@keyframes terminalContents {
-    0% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
 }

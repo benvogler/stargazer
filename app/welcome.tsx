@@ -1,48 +1,34 @@
 'use client';
 import { useState, useEffect } from 'react';
-import './globals.css'
-import styles from './page.module.css';
-import { SparklesIcon } from '@heroicons/react/24/outline';
-import { SpeakerWaveIcon } from '@heroicons/react/24/solid';
-import { SpeakerXMarkIcon } from '@heroicons/react/24/solid';
-import Welcome from './welcome';
+import styles from './welcome.module.css';
+import { SunIcon, XCircleIcon } from '@heroicons/react/24/outline';
 
-export default function Home() {
-  let [ muted, setMuted ] = useState(true);
+export default function Welcome() {
+  let [ date, setDate ] = useState(new Date());
+  useEffect(() => {
+    let timer = setInterval(() => setDate(new Date()), 1000);
+    return function cleanup() {
+      clearInterval(timer);
+    }
+  }, [date]);
   return (
-    <main>
-      <div className={styles.backgroundVignette}></div>
-      <video className={styles.backgroundVideo} autoPlay loop muted={muted}>
-        <source src="background.mp4" type="video/mp4"></source>
-      </video>
-      <div className={styles.interfaceWrapper}>
-        <div className={styles.interface}>
-          <div className="flex justify-between">
+    <div className={styles.welcomeMessageWrapper} style={{left: 'calc(50% - 200px)', top: 'calc(50% - 100px)'}} draggable onDragStart={handleDragStart} onDrag={handleDrag}>
+        <div id="welcomeModal" className={styles.welcomeMessage + ' transition-opacity'}>
             <div>
-              <h1 className="text-base text-sky-300 flex gap-2 items-center tracking-normal">
-                <SparklesIcon className="h-5 w-5 text-yellow-300"/>
-                Stargazer Station
-              </h1>
-              <h2 className="text-base">Pleione 10 d, Inner Orion Spur</h2>
+                <div className="flex justify-between">
+                    <div className="text-lg text-sky-300 flex gap-2 items-center">
+                    <SunIcon className="h-6 w-6 text-yellow-300"/>
+                    Welcome, Commander
+                    </div>
+                    <XCircleIcon className="h-6 w-6 cursor-pointer text-sky-800 transition-all hover:scale-110 hover:drop-shadow-sm" onClick={closeWelcomeMessage}></XCircleIcon>
+                </div>
+                <div className="text-base">
+                    Current Time: {getTime(date)}
+                </div>
             </div>
-            <div className="flex gap-2 items-center h-min">
-              <div className="text-base" id="volumeLabel">Audio Isolation: {muted ? 'Engaged' : 'Disengaged'}</div>
-              <div className="cursor-pointer text-sky-800 transition-all hover:scale-110 hover:drop-shadow-sm">
-                <SpeakerWaveIcon id="volumeOnIcon" className={'h-6 w-6' + (muted ? ' hidden' : '')} onClick={() => toggleMute(muted, setMuted)}/>
-                <SpeakerXMarkIcon id="volumeOffIcon" className={'h-6 w-6' + (!muted ? ' hidden' : '')} onClick={() => toggleMute(muted, setMuted)}/>
-              </div>
-            </div>
-            <Welcome></Welcome>
-          </div>
         </div>
-      </div>
-    </main>
+    </div>
   )
-}
-
-function toggleMute(muted: boolean, setMuted: any) {
-  setMuted(!muted);
-  window.localStorage.setItem('muted', '' + !muted);
 }
 
 function leftPad(num: Number, count=2) {
@@ -98,5 +84,9 @@ function closeWelcomeMessage() {
   let modal: any = document.querySelector('#welcomeModal')!;
   modal.classList.add(styles.closeWelcomeMessage);
   modal.style.animation = 'none';
-  window.setTimeout(() => modal.style.animation = '', 1);
+  modal.children[0].style.animation = 'none';
+  window.setTimeout(() => {
+    modal.style.animation = '';
+    modal.children[0].style.animation = '';
+  }, 1);
 }
