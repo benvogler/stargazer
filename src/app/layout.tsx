@@ -1,8 +1,11 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Major_Mono_Display } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const major = Major_Mono_Display({
+  weight: '400',
+  subsets: ['latin']
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={major.className + ' lowercase text-shadow-sm shadow-black text-sky-600'}>{children}</body>
     </html>
   )
 }
