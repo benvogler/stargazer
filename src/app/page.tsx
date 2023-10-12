@@ -7,6 +7,7 @@ import { SpeakerXMarkIcon } from '@heroicons/react/24/solid';
 
 export default function Home() {
   let [ date, setDate ] = useState(new Date());
+  let [ muted, setMuted ] = useState(true);
   useEffect(() => {
     let timer = setInterval(() => setDate(new Date()), 1000);
     return function cleanup() {
@@ -16,10 +17,9 @@ export default function Home() {
   return (
     <main>
       <div className={styles.backgroundVignette}></div>
-      <video className={styles.backgroundVideo} autoPlay loop muted>
+      <video className={styles.backgroundVideo} autoPlay loop muted={muted}>
         <source src="background.mp4" type="video/mp4"></source>
       </video>
-
       <div className={styles.interfaceWrapper}>
         <div className={styles.interface}>
           <div className="flex justify-between">
@@ -31,10 +31,10 @@ export default function Home() {
               <h2 className="text-base">Pleione 10 d, Inner Orion Spur</h2>
             </div>
             <div className="flex gap-2 items-center h-min">
-              <div className="text-base" id="volumeLabel">Audio Isolation: Engaged</div>
+              <div className="text-base" id="volumeLabel">Audio Isolation: {muted ? 'Engaged' : 'Disengaged'}</div>
               <div className="cursor-pointer text-sky-800 transition-all hover:scale-110 hover:drop-shadow-sm">
-                <SpeakerWaveIcon id="volumeOnIcon" className="h-6 w-6 hidden" onClick={toggleMute}/>
-                <SpeakerXMarkIcon id="volumeOffIcon" className="h-6 w-6" onClick={toggleMute}/>
+                <SpeakerWaveIcon id="volumeOnIcon" className={'h-6 w-6' + (muted ? ' hidden' : '')} onClick={() => toggleMute(muted, setMuted)}/>
+                <SpeakerXMarkIcon id="volumeOffIcon" className={'h-6 w-6' + (!muted ? ' hidden' : '')} onClick={() => toggleMute(muted, setMuted)}/>
               </div>
             </div>
             <div className={styles.welcomeMessageWrapper} style={{left: 'calc(50% - 200px)', top: 'calc(50% - 100px)'}} draggable onDragStart={handleDragStart} onDrag={handleDrag}>
@@ -58,12 +58,9 @@ export default function Home() {
   )
 }
 
-function toggleMute() {
-  let video: HTMLVideoElement = document.querySelector(`.${styles.backgroundVideo}`)!;
-  video.muted = !video.muted;
-  document.querySelector('#volumeOnIcon')?.classList.toggle('hidden');
-  document.querySelector('#volumeOffIcon')?.classList.toggle('hidden');
-  document.querySelector('#volumeLabel')!.innerHTML = `Audio Isolation: ${video.muted ? 'Engaged' : 'Disengaged'}`;
+function toggleMute(muted: boolean, setMuted: any) {
+  setMuted(!muted);
+  window.localStorage.setItem('muted', '' + !muted);
 }
 
 function leftPad(num: Number, count=2) {
@@ -80,7 +77,6 @@ function getTime(d: Date) {
 
 let offsetX: number, offsetY: number, left: number, top: number;
 function handleDragStart(event: any) {
-  console.log(event.currentTarget);
   let preview: any = document.querySelector('#dragPreview');
   if (!preview) {
     preview = document.createElement('div');
