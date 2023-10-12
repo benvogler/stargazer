@@ -5,7 +5,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transform: scale(2);
 }
 
 .welcomeMessageWrapper :global {

@@ -3,9 +3,8 @@ import { useState, useEffect } from 'react';
 import './globals.css'
 import styles from './page.module.css';
 import { SparklesIcon } from '@heroicons/react/24/outline';
-import { SpeakerWaveIcon } from '@heroicons/react/24/solid';
-import { SpeakerXMarkIcon } from '@heroicons/react/24/solid';
 import Welcome from './welcome';
+import VolumeControl from './volumeControl';
 
 export default function Home() {
   let [ muted, setMuted ] = useState(true);
@@ -25,78 +24,11 @@ export default function Home() {
               </h1>
               <h2 className="text-base">Pleione 10 d, Inner Orion Spur</h2>
             </div>
-            <div className="flex gap-2 items-center h-min">
-              <div className="text-base" id="volumeLabel">Audio Isolation: {muted ? 'Engaged' : 'Disengaged'}</div>
-              <div className="cursor-pointer text-sky-800 transition-all hover:scale-110 hover:drop-shadow-sm">
-                <SpeakerWaveIcon id="volumeOnIcon" className={'h-6 w-6' + (muted ? ' hidden' : '')} onClick={() => toggleMute(muted, setMuted)}/>
-                <SpeakerXMarkIcon id="volumeOffIcon" className={'h-6 w-6' + (!muted ? ' hidden' : '')} onClick={() => toggleMute(muted, setMuted)}/>
-              </div>
-            </div>
-            <Welcome></Welcome>
+            <VolumeControl muted={muted} onToggleMute={(value: boolean) => setMuted(value)}></VolumeControl>
           </div>
+          <Welcome></Welcome>
         </div>
       </div>
     </main>
   )
-}
-
-function toggleMute(muted: boolean, setMuted: any) {
-  setMuted(!muted);
-  window.localStorage.setItem('muted', '' + !muted);
-}
-
-function leftPad(num: Number, count=2) {
-  let str: String = '' + num;
-  while (str.length < count) {
-    str = '0' + num;
-  }
-  return str;
-}
-
-function getTime(d: Date) {
-  return `${leftPad(d.getUTCHours())}:${leftPad(d.getUTCMinutes())}:${leftPad(d.getUTCSeconds())}`;
-}
-
-let offsetX: number, offsetY: number, left: number, top: number;
-function handleDragStart(event: any) {
-  let preview: any = document.querySelector('#dragPreview');
-  if (!preview) {
-    preview = document.createElement('div');
-    preview.style.backgroundColor = 'rgba(0,0,0,0)';
-    preview.style.height = '1px';
-    preview.style.width = '1px';
-    preview.id = 'dragPreview';
-    document.body.appendChild(preview);
-  }
-  event.dataTransfer.setDragImage(preview, 0, 0);
-  let leftMatches = event.target.style.left.match(/50% ([+-]) ([0-9]*)px/);
-  let topMatches = event.target.style.top.match(/50% ([+-]) ([0-9]*)px/);
-  left = parseInt(leftMatches[2]) * (leftMatches[1] === '+' ? 1 : -1);
-  top = parseInt(topMatches[2]) * (topMatches[1] === '+' ? 1 : -1);
-  offsetX = event.clientX;
-  offsetY = event.clientY;
-  // window.setTimeout(() => event.target.style.visibility = 'hidden');
-}
-
-function handleDrag(event: any) {
-  if (event.clientX === 0 && event.clientY === 0) {
-    return;
-  }
-  event.preventDefault();
-  let element: HTMLElement = event.target;
-  let updatedLeft = left - (offsetX - event.clientX);
-  let updatedTop = top - (offsetY - event.clientY);
-  element.style.left = `calc(50% ${updatedLeft >= 0 ? '+' : '-'} ${Math.abs(updatedLeft)}px)`;
-  element.style.top = `calc(50% ${updatedTop >= 0 ? '+' : '-'} ${Math.abs(updatedTop)}px)`;
-  left = updatedLeft;
-  top = updatedTop;
-  offsetX = event.clientX;
-  offsetY = event.clientY;
-}
-
-function closeWelcomeMessage() {
-  let modal: any = document.querySelector('#welcomeModal')!;
-  modal.classList.add(styles.closeWelcomeMessage);
-  modal.style.animation = 'none';
-  window.setTimeout(() => modal.style.animation = '', 1);
 }
