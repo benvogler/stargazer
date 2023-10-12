@@ -1,10 +1,18 @@
 'use client';
-import { SparklesIcon } from '@heroicons/react/24/outline';
+import { useState, useEffect } from 'react';
 import styles from './page.module.css';
+import { SparklesIcon, SunIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { SpeakerWaveIcon } from '@heroicons/react/24/solid';
 import { SpeakerXMarkIcon } from '@heroicons/react/24/solid';
 
 export default function Home() {
+  let [ date, setDate ] = useState(new Date());
+  useEffect(() => {
+    let timer = setInterval(() => setDate(new Date()), 1000);
+    return function cleanup() {
+      clearInterval(timer);
+    }
+  });
   return (
     <main>
       <div className={styles.backgroundVignette}></div>
@@ -28,6 +36,18 @@ export default function Home() {
               <SpeakerXMarkIcon id="volumeOffIcon" className="h-6 w-6" onClick={toggleMute}/>
             </div>
           </div>
+          <div id="welcomeModal" className={styles.welcomeMessage + ' p-4 transition-opacity'}>
+            <div className="flex justify-between">
+              <div className="text-lg text-sky-300 flex gap-2 items-center">
+                <SunIcon className="h-6 w-6 text-yellow-300"/>
+                Welcome, Commander
+              </div>
+              <XCircleIcon className="h-6 w-6 cursor-pointer text-sky-800 transition-all hover:scale-110 hover:drop-shadow-sm" onClick={() => document.querySelector('#welcomeModal')!.classList.add('opacity-0')}></XCircleIcon>
+            </div>
+            <div className="text-base">
+              Current Time: {getTime(date)}
+            </div>
+          </div>
         </div>
       </div>
     </main>
@@ -40,4 +60,16 @@ function toggleMute() {
   document.querySelector('#volumeOnIcon')?.classList.toggle('hidden');
   document.querySelector('#volumeOffIcon')?.classList.toggle('hidden');
   document.querySelector('#volumeLabel')!.innerHTML = `Audio Isolation: ${video.muted ? 'Engaged' : 'Disengaged'}`;
+}
+
+function leftPad(num, count=2) {
+  num = '' + num;
+  while (num.length < count) {
+    num = '0' + num;
+  }
+  return num;
+}
+
+function getTime(d: Date) {
+  return `${leftPad(d.getUTCHours())}:${leftPad(d.getUTCMinutes())}:${leftPad(d.getUTCSeconds())}`;
 }
