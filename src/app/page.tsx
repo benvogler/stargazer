@@ -62,12 +62,12 @@ function toggleMute() {
   document.querySelector('#volumeLabel')!.innerHTML = `Audio Isolation: ${video.muted ? 'Engaged' : 'Disengaged'}`;
 }
 
-function leftPad(num, count=2) {
-  num = '' + num;
-  while (num.length < count) {
-    num = '0' + num;
+function leftPad(num: Number, count=2) {
+  let str: String = '' + num;
+  while (str.length < count) {
+    str = '0' + num;
   }
-  return num;
+  return str;
 }
 
 function getTime(d: Date) {
