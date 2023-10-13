@@ -2,11 +2,11 @@
 import { useState, useEffect } from 'react';
 
 const useSound = require('use-sound').default;
-import { SettingsStore, useSettingsStore } from './settings.store';
+import { SettingsStore, useSettingsStore } from '@/stores/settings';
 
 import styles from './welcome.module.css';
 import { SunIcon, XCircleIcon } from '@heroicons/react/24/outline';
-import { Sounds } from './audio';
+import { Sounds } from '@/utils/audio';
 
 export default function Welcome() {
     let [date, setDate] = useState(new Date());

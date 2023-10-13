@@ -1,10 +1,10 @@
 'use client';
 const useSound = require('use-sound').default;
-import { SettingsStore, useSettingsStore } from './settings.store';
+import { SettingsStore, useSettingsStore } from '@/stores/settings';
 
 import { SpeakerWaveIcon } from '@heroicons/react/24/solid';
 import { SpeakerXMarkIcon } from '@heroicons/react/24/solid';
-import { Sounds, createSounds } from './audio';
+import { Sounds, createSounds } from '@/utils/audio';
 
 export default function VolumeControl() {
     const { mute, toggleMute } = useSettingsStore((state: SettingsStore) => ({mute: state.mute, toggleMute: state.toggleMute}));

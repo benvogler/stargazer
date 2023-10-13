@@ -1,13 +1,13 @@
 'use client';
 
-import Welcome from './welcome';
-import VolumeControl from './volumeControl';
-import { SettingsStore, useSettingsStore } from './settings.store';
+import Welcome from '@/components/welcome/welcome';
+import Logo from '@/components/logo/logo';
+import NewsTicker from '@/components/newsTicker/newsTicker';
+import VolumeControl from '@/components/volumeControl/volumeControl';
 
 import './globals.css'
 import styles from './page.module.css';
-import Logo from './logo';
-import NewsTicker from './newsTicker';
+import { SettingsStore, useSettingsStore } from '@/stores/settings';
 
 export default function Home() {
     const mute: boolean = useSettingsStore((state: SettingsStore) => state.mute);
