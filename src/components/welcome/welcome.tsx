@@ -9,7 +9,10 @@ import { SunIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Sounds } from '@/utils/audio';
 
 export default function Welcome() {
-    let [date, setDate] = useState(new Date());
+    let [date, setDate]: [any, any] = useState(null);
+    useEffect(() => {
+        setDate(new Date());
+    }, [])
     const { mute, toggleMute } = useSettingsStore((state: SettingsStore) => ({ mute: state.mute, toggleMute: state.toggleMute }));
     useEffect(() => {
         let timer = setInterval(() => setDate(new Date()), 1000);
@@ -54,6 +57,7 @@ function leftPad(num: number, count = 2) {
 }
 
 function getTime(d: Date) {
+    if (!d) {return ''};
     return `${leftPad(d.getUTCHours())}:${leftPad(d.getUTCMinutes())}:${leftPad(d.getUTCSeconds())}`;
 }
 
@@ -83,7 +87,6 @@ function handleDragStart(event: any) {
     }
     offsetX = event.clientX;
     offsetY = event.clientY;
-    // window.setTimeout(() => event.target.style.visibility = 'hidden');
 }
 
 function handleDrag(event: any) {
