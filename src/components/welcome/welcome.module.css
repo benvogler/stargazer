@@ -1,7 +1,7 @@
 .welcomeMessageWrapper {
     position: absolute;
-    width: 400px;
-    height: 200px;
+    width: 50vh;
+    height: 25vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,10 +45,10 @@
 }
 
 .closeWelcomeMessage {
-    height: 200px;
-    max-height: 200px;
+    width: 50vh;
+    height: 25vh;
+    max-height: 25vh;
     padding: 1rem;
-    width: 400px;
     opacity: 1;
 }
 

@@ -14,7 +14,7 @@ const headlines = [
 export default function NewsTicker() {
     let iterations = [1, 2];
     return (
-        <div className={styles.tickerWrapper + ' overflow-x-scroll py-3'}>
+        <div className={styles.tickerWrapper + ' overflow-x-hidden py-3'}>
             <div className="w-max relative flex">
                 {
                     iterations.map(key => {

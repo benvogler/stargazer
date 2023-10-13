@@ -19,7 +19,7 @@ export default function Welcome() {
     }, [date]);
     const [muffleSfx] = useSound(Sounds.minimize);
     return (
-        <div className={styles.welcomeMessageWrapper} style={{ left: 'calc(50% - 200px)', top: 'calc(50% - 100px)' }} draggable onDragStart={handleDragStart} onDrag={handleDrag}>
+        <div className={styles.welcomeMessageWrapper} style={{ left: 'calc(50% - 25vh)', top: 'calc(50% - 12.5vh)' }} draggable onDragStart={handleDragStart} onDrag={handleDrag}>
             <div id="welcomeModal" className={styles.welcomeMessage + ' transition-opacity'}>
                 <div className="flex flex-col justify-between h-full">
                     <div>
@@ -63,7 +63,7 @@ function getDate() {
     return d.toLocaleDateString('en-us', {year: 'numeric', month: 'short', day: '2-digit'}) ;
 }
 
-let offsetX: number, offsetY: number, left: number, top: number;
+let offsetX: number, offsetY: number, left: number = 0, top: number = 0;
 function handleDragStart(event: any) {
     let preview: any = document.querySelector('#dragPreview');
     if (!preview) {
@@ -75,10 +75,12 @@ function handleDragStart(event: any) {
         document.body.appendChild(preview);
     }
     event.dataTransfer.setDragImage(preview, 0, 0);
-    let leftMatches = event.target.style.left.match(/50% ([+-]) ([0-9]*)px/);
-    let topMatches = event.target.style.top.match(/50% ([+-]) ([0-9]*)px/);
-    left = parseInt(leftMatches[2]) * (leftMatches[1] === '+' ? 1 : -1);
-    top = parseInt(topMatches[2]) * (topMatches[1] === '+' ? 1 : -1);
+    let leftMatches = event.target.style.left.match(/50% - 25vh ([+-]) ([0-9]*)px/);
+    let topMatches = event.target.style.top.match(/50% - 12.5vh ([+-]) ([0-9]*)px/);
+    if (leftMatches?.length && topMatches?.length) {
+        left = parseInt(leftMatches[2]) * (leftMatches[1] === '+' ? 1 : -1);
+        top = parseInt(topMatches[2]) * (topMatches[1] === '+' ? 1 : -1);
+    }
     offsetX = event.clientX;
     offsetY = event.clientY;
     // window.setTimeout(() => event.target.style.visibility = 'hidden');
@@ -92,8 +94,8 @@ function handleDrag(event: any) {
     let element: HTMLElement = event.target;
     let updatedLeft = left - (offsetX - event.clientX);
     let updatedTop = top - (offsetY - event.clientY);
-    element.style.left = `calc(50% ${updatedLeft >= 0 ? '+' : '-'} ${Math.abs(updatedLeft)}px)`;
-    element.style.top = `calc(50% ${updatedTop >= 0 ? '+' : '-'} ${Math.abs(updatedTop)}px)`;
+    element.style.left = `calc(50% - 25vh ${updatedLeft >= 0 ? '+' : '-'} ${Math.abs(updatedLeft)}px)`;
+    element.style.top = `calc(50% - 12.5vh ${updatedTop >= 0 ? '+' : '-'} ${Math.abs(updatedTop)}px)`;
     left = updatedLeft;
     top = updatedTop;
     offsetX = event.clientX;
