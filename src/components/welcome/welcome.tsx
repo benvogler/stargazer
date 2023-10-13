@@ -21,7 +21,9 @@ export default function Welcome() {
             clearInterval(timer);
         }
     }, [date]);
-    const [muffleSfx] = useSound(Sounds.minimize);
+    const [minimizeSfx] = useSound(Sounds.minimize, {
+        volume: 4
+    });
     return (
         <div className={styles.welcomeMessageWrapper} style={{ left: 'calc(50% - 25vh)', top: 'calc(50% - 12.5vh)' }} draggable onDragStart={handleDragStart} onDrag={handleDrag}>
             <div id="welcomeModal" className={styles.welcomeMessage + ' transition-opacity'}>
@@ -32,7 +34,7 @@ export default function Welcome() {
                                 <SunIcon className="h-6 w-6 text-yellow-300" />
                                 Welcome, {'<Unknown Employee>'}
                             </div>
-                            <XCircleIcon className="h-6 w-6 cursor-pointer text-sky-700 transition-all hover:text-sky-500 hover:scale-110 hover:drop-shadow-sm" onClick={() => closeWelcomeMessage(muffleSfx, mute)}></XCircleIcon>
+                            <XCircleIcon className="h-6 w-6 cursor-pointer text-sky-700 transition-all hover:text-sky-500 hover:scale-110 hover:drop-shadow-sm" onClick={() => closeWelcomeMessage(minimizeSfx, mute)}></XCircleIcon>
                         </div>
                         <p>Station Systems: Nominal</p>
                         <p>Station Population: 372</p>
@@ -98,14 +100,14 @@ function handleDrag(event: any) {
     offsetY = event.clientY;
 }
 
-function closeWelcomeMessage(muffleSfx: () => void, mute: boolean) {
+function closeWelcomeMessage(minimizeSfx: () => void, mute: boolean) {
     let modal: any = document.querySelector('#welcomeModal')!;
     modal.classList.add(styles.closeWelcomeMessage);
     modal.style.animation = 'none';
     modal.children[0].style.animation = 'none';
     window.setTimeout(() => {
         if (!mute) {
-            muffleSfx();
+            minimizeSfx();
         }
         modal.style.animation = '';
         modal.children[0].style.animation = '';

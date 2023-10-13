@@ -14,10 +14,10 @@ import Notifications from '@/components/notifications/notifications';
 
 export default function Home() {
     const mute: boolean = useSettingsStore((state: SettingsStore) => state.mute);
-    const [ notifications, setNotifications ] = useState([]);
+    // const [ notifications, setNotifications ] = useState([]);
     const state: any = useRef();
-    state.notifications = notifications;
-    state.setNotifications = setNotifications;
+    // state.notifications = notifications;
+    // state.setNotifications = setNotifications;
     return (
         <main>
             <div className={styles.backgroundVignette}></div>
@@ -40,7 +40,7 @@ export default function Home() {
                     </div>
                     <div className="py-4 min-h-[1px] z-10 flex">
                         <LandingPads onDeparture={landingPad => handleLandingPadDeparture(landingPad, state)}></LandingPads>
-                        <Notifications notifications={notifications} setNotifications={setNotifications} removeNotification={(notification: any) => removeNotification(notification, state)}></Notifications>
+                        {/* <Notifications notifications={notifications} setNotifications={setNotifications} removeNotification={(notification: any) => removeNotification(notification, state)}></Notifications> */}
                         <Welcome></Welcome>
                     </div>
                     <div>
@@ -53,18 +53,18 @@ export default function Home() {
 }
 
 function handleLandingPadDeparture(landingPad: any, {notifications, setNotifications}: {notifications: any, setNotifications: (notifications: any) => void}) {
-    notifications.push({
-        message: `${landingPad.name} is departing from landing pad ${landingPad.number}`
-    });
-    console.log('add', notifications);
-    setNotifications(JSON.parse(JSON.stringify(notifications)));
+    // notifications.push({
+    //     message: `${landingPad.name} is departing from landing pad ${landingPad.number}`
+    // });
+    // console.log('add', notifications);
+    // setNotifications(JSON.parse(JSON.stringify(notifications)));
 }
 
-function removeNotification(notification: any, {notifications, setNotifications}: {notifications: any, setNotifications: (notifications: any) => void}) {
-    console.log('remove', notification.timeout, notifications, notifications.filter((n: any) => n.timeout !== notification.timeout));
-    setNotifications(
-        JSON.parse(JSON.stringify(
-            notifications.filter((n: any) => n.timeout !== notification.timeout)
-        ))
-    );
-}
+// function removeNotification(notification: any, {notifications, setNotifications}: {notifications: any, setNotifications: (notifications: any) => void}) {
+//     console.log('remove', notification.timeout, notifications, notifications.filter((n: any) => n.timeout !== notification.timeout));
+//     setNotifications(
+//         JSON.parse(JSON.stringify(
+//             notifications.filter((n: any) => n.timeout !== notification.timeout)
+//         ))
+//     );
+// }
