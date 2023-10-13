@@ -7,6 +7,7 @@ import { SettingsStore, useSettingsStore } from './settings.store';
 import './globals.css'
 import styles from './page.module.css';
 import Logo from './logo';
+import NewsTicker from './newsTicker';
 
 export default function Home() {
     const mute: boolean = useSettingsStore((state: SettingsStore) => state.mute);
@@ -17,10 +18,10 @@ export default function Home() {
                 <source src="background.mp4" type="video/mp4"></source>
             </video>
             <div className={styles.interfaceWrapper}>
-                <div className={styles.interface}>
+                <div className={styles.interface + ' flex flex-col justify-between'}>
                     <div className="flex justify-between">
                         <div className="flex gap-2 items-center">
-                            <Logo className="text-sky-500 h-12 w-12"></Logo>
+                            <Logo type="federation" className="text-sky-500 h-12 w-12"></Logo>
                             <div className="flex flex-col justify-center">
                                 <h1 className="text-large text-sky-300 tracking-normal">
                                     Stargazer Station
@@ -30,7 +31,12 @@ export default function Home() {
                         </div>
                         <VolumeControl></VolumeControl>
                     </div>
-                    <Welcome></Welcome>
+                    <div>
+                        <Welcome></Welcome>
+                    </div>
+                    <div>
+                        <NewsTicker></NewsTicker>
+                    </div>
                 </div>
             </div>
         </main>
