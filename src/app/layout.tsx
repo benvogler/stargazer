@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={major.className + ' lowercase text-shadow-sm shadow-sky-950 text-sky-600 tracking-tighter'}>{children}</body>
+      <body className={major.className + ' lowercase text-shadow-sm shadow-sky-950 text-sky-600 tracking-tighter font-bold'}>{children}</body>
     </html>
   )
 }

@@ -76,7 +76,7 @@ body {
         height: 100%;
         max-height: 100%;
         width: 100%;
-        padding: 1em 1em 0;
+        padding: 1em;
         opacity: 1;
     }
 }
@@ -93,4 +93,31 @@ body {
     100% {
         opacity: 1;
     }
+}
+
+/* Customize website's scrollbar like Mac OS
+Not supports in Firefox and IE */
+
+/* total width */
+*::-webkit-scrollbar {
+    background-color: rgba(0,0,0,0);
+    width: 12px;
+}
+
+/* background of the scrollbar except button or resizer */
+*::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,0);
+}
+
+/* scrollbar itself */
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(38,39,66,0.5);
+    border-radius: 4px;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+}
+
+/* set button(top and bottom of the scrollbar) */
+*::-webkit-scrollbar-button {
+    display:none;
 }

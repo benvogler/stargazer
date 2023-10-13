@@ -29,6 +29,7 @@
     min-height: 4px;
     max-height: 4px;
     opacity: 0;
+    padding-bottom: 0 !important;
 }
 
 .interface :global {

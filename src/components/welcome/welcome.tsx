@@ -7,6 +7,7 @@ import { SettingsStore, useSettingsStore } from '@/stores/settings';
 import styles from './welcome.module.css';
 import { SunIcon, XCircleIcon } from '@heroicons/react/24/outline';
 import { Sounds } from '@/utils/audio';
+import { leftPad } from '@/utils/utils';
 
 export default function Welcome() {
     let [date, setDate]: [any, any] = useState(null);
@@ -46,14 +47,6 @@ export default function Welcome() {
             </div>
         </div>
     )
-}
-
-function leftPad(num: number, count = 2) {
-    let str: string = '' + num;
-    while (str.length < count) {
-        str = '0' + num;
-    }
-    return str;
 }
 
 function getTime(d: Date) {
