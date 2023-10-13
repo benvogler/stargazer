@@ -1,6 +1,5 @@
 .tickerWrapper {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 0 -1em;
 }
 
 .ticker {
@@ -9,7 +8,7 @@
     animation-duration: 120s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    padding-right: 2em;
+    padding-right: 3em;
 }
 
 .ticker:nth-child(1) {
