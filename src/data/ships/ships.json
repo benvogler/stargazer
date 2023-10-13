@@ -1,0 +1,240 @@
+[
+    {
+        "name": "Imperial Eagle",
+        "iconName": "imperial_eagle",
+        "description": "Based on Core Dynamics’ Eagle, Gutamaya's Imperial Eagle places greater emphasis on speed and combat than its predecessor. The ship's armour and shields have been enhanced, and one of the small hardpoints of the original has been replaced with a medium hardpoint. Naturally, these features have made the ship heavier and less manoeuvrable than its predecessor, but the Imperial Eagle remains a solid choice for those seeking a high-speed attack ship.",
+        "manufacturerName": "Gutamaya",
+        "details": {
+            "years_produced": "3199-Present",
+            "type": "Combat",
+            "landing_pad_size": "small",
+            "dimensions": "31.2m x 34.7m x 7.1m",
+            "pilot_seats": 1,
+            "hull_mass": 50,
+            "shields": 104,
+            "heat_capacity": 163,
+            "fuel_capacity": 4
+        }
+    },
+    {
+        "name": "Sidewinder Mk I",
+        "iconName": "sidewinder",
+        "description": "The Sidewinder is a multipurpose ship manufactured by Faulcon DeLacy. Its versatility and comparatively low price point have made it popular with novice pilots, but the Sidewinder's reputation as an entry-level vessel should not be seen as a sign of inferiority - it is one of the most manoeuvrable ships on the market.",
+        "manufacturerName": "Faulcon DeLacy",
+        "details": {
+            "years_produced": "2982-Present",
+            "type": "Multipurpose",
+            "landing_pad_size": "small",
+            "dimensions": "14.9m x 21.3m x 5.4m",
+            "pilot_seats": 1,
+            "hull_mass": 25,
+            "shields": 52,
+            "heat_capacity": 140,
+            "fuel_capacity": 2
+        }
+    },
+    {
+        "name": "Beluga Liner",
+        "iconName": "beluga_liner",
+        "description": "Manufactured by Saud Kruger, the Beluga Liner is a high-end passenger ship for those who value luxury and comfort. With the largest passenger capacity of any Saud Kruger vessel, and the ability to accommodate a luxury-tier passenger cabin, the Beluga is the only choice for those who want to travel in style.",
+        "manufacturerName": "Saud Kruger",
+        "details": {
+            "years_produced": "3302-Present",
+            "type": "Passenger Line",
+            "landing_pad_size": "large",
+            "dimensions": "209.1m x 131.6m x 38.6m",
+            "pilot_seats": 4,
+            "hull_mass": 950,
+            "shields": 110,
+            "heat_capacity": 283,
+            "fuel_capacity": 128
+        }
+    },
+    {
+        "name": "Eagle Mk II",
+        "iconName": "eagle_mkII",
+        "description": "Developed by Core Dynamics, the Eagle is a compact combat ship with peerless manoeuvrability. For many independent pilots it represents a natural progression from the Sidewinder, boasting superior cargo capacity and combat ability in addition to a better hardpoint array. These features are offset by a comparatively short jump range, however.",
+        "manufacturerName": "Core Dynamics",
+        "details": {
+            "years_produced": "3199-Present",
+            "type": "Combat",
+            "landing_pad_size": "small",
+            "dimensions": "31.2m x 29.7m x 7.1m",
+            "pilot_seats": 1,
+            "hull_mass": 50,
+            "shields": 78,
+            "heat_capacity": 165,
+            "fuel_capacity": 4
+        }
+    },
+    {
+        "name": "Python",
+        "iconName": "python",
+        "description": "Manufactured by Faulcon deLacy, the Python is a multipurpose ship that offers an enticing balance of manoeuvrability, firepower and defence. With five hardpoints, it can go head-to-head with large ships such as the Anaconda and Imperial Cutter, while its agility allows it to handle smaller vessels without having to rely on turret weapons. The Python also has a sizeable cargo hold, making it a viable choice for those seeking a combat-capable freighter.",
+        "manufacturerName": "Faulcon DeLacy",
+        "details": {
+            "years_produced": "2700-Present",
+            "type": "Multipurpose",
+            "landing_pad_size": "medium",
+            "dimensions": "87.9m x 58.1m x 18.0m",
+            "pilot_seats": 2,
+            "hull_mass": 350,
+            "shields": 294,
+            "heat_capacity": 300,
+            "fuel_capacity": 32
+        }
+    },
+    {
+        "name": "Viper Mk III",
+        "iconName": "viper_mkIII",
+        "description": "The Viper Mk III is a light combat ship manufactured by Faulcon deLacy. Fast and manoeuvrable, the Viper's comparatively low price point makes it a good option for aspiring bounty hunters, while its versatility has made it popular with security forces throughout the galaxy.",
+        "manufacturerName": "Faulcon DeLacy",
+        "details": {
+            "years_produced": "3300-Present",
+            "type": "Combat",
+            "landing_pad_size": "small",
+            "dimensions": "29.8m x 24.0m x 8.6m",
+            "pilot_seats": 1,
+            "hull_mass": 50,
+            "shields": 137,
+            "heat_capacity": 195,
+            "fuel_capacity": 4
+        }
+    },
+    {
+        "name": "Type-10 Defender",
+        "iconName": "type10_defender",
+        "description": "The Alliance commissioned Lakon Spaceways to produce the versatile Type-10 Defender, which represents a comprehensive revision of the Type-9 Heavy. Boasting greater speed, acceleration and manoeuvrability than the Type-9 and a more focused hardpoint layout. It was envisaged principally as a combat vessel, but its sizeable cargo hold makes it equally useful to traders.",
+        "manufacturerName": "Lakon Spaceways",
+        "details": {
+            "years_produced": "3303-Present",
+            "type": "Combat Freighter",
+            "landing_pad_size": "large",
+            "dimensions": "135.1m x 118.4m x 39.3m",
+            "pilot_seats": 4,
+            "hull_mass": 1200,
+            "shields": 99,
+            "heat_capacity": 335,
+            "fuel_capacity": 64
+        }
+    },
+    {
+        "name": "Mamba",
+        "iconName": "mamba",
+        "description": "Based on an unreleased racing prototype, the Mamba is one of the fastest ships in production. It can also deliver a lot of punishment, boasting one huge and two large hardpoints. This emphasis on firepower and speed means the ship can hit hard and fast, vanishing before the target has a chance to react. Comparisons to the Fer-de-Lance, also produced by Zorgon Peterson, will be inevitable, but the Mamba is in fact faster in a straight line, while being slightly less maneuverable.",
+        "manufacturerName": "Zorgon Peterson",
+        "details": {
+            "years_produced": "3304-Present",
+            "type": "Combat",
+            "landing_pad_size": "medium",
+            "dimensions": "72.2m x 50.1m x 11.4m",
+            "pilot_seats": 2,
+            "hull_mass": 250,
+            "shields": 244,
+            "heat_capacity": 165,
+            "fuel_capacity": 8
+        }
+    },
+    {
+        "name": "Krait Mk II",
+        "iconName": "krait_mkII",
+        "description": "The Krait MkII is a reimagining of the Krait Lightspeeder, which was originally manufactured by Faulcon DeLacy in the 3100s. Although the new ship is larger than the original, it possesses many of the same characteristics, emphasizing speed, manoeuvrability and firepower over defensive capability. The ship also boasts a fighter bay and space for up to two crew members, making it a good option for those seeking a medium-weight, multipurpose vessel.",
+        "manufacturerName": "Faulcon DeLacy",
+        "details": {
+            "years_produced": "3304-Present",
+            "type": "Combat Multipurpose",
+            "landing_pad_size": "medium",
+            "dimensions": "73.3m x 72m x 13.5m",
+            "pilot_seats": 3,
+            "hull_mass": 320,
+            "shields": 262,
+            "heat_capacity": 300,
+            "fuel_capacity": 32
+        }
+    },
+    {
+        "name": "Imperial Cutter",
+        "iconName": "imperial_cutter",
+        "description": "The pride of Gutamaya's shipyards, the Imperial Cutter is a formidable all-rounder. With sufficient armour and shielding to withstand all but the most determined attacks, and a total of seven hardpoints, the Cutter boasts an intimidating combat profile, while its substantial cargo hold makes It a solid choice for traders.",
+        "manufacturerName": "Gutamaya",
+        "details": {
+            "years_produced": "3301-Present",
+            "type": "Multipurpose",
+            "landing_pad_size": "large",
+            "dimensions": "192.6m x 111.1m x 33.4m",
+            "pilot_seats": 4,
+            "hull_mass": 1100,
+            "shields": 704,
+            "heat_capacity": 327,
+            "fuel_capacity": 64
+        }
+    },
+    {
+        "name": "Fer-de-Lance",
+        "iconName": "fer_de_lance",
+        "description": "The Fer-de-Lance is a heavy combat ship manufactured by Zorgon Peterson. With four medium and one huge hardpoint, the ship is a veritable powerhouse, able to mount a challenge even to the Anaconda and Federal Corvette. If the vessel has a drawback it is that it is highly specialised - consumers are advised that the Fer-de-Lance Is unsuited to activities other than combat.",
+        "manufacturerName": "Zorgon Peterson",
+        "details": {
+            "years_produced": "3100-Present",
+            "type": "Combat",
+            "landing_pad_size": "medium",
+            "dimensions": "73.6m x 51.6m x 15.4m",
+            "pilot_seats": 2,
+            "hull_mass": 250,
+            "shields": 271,
+            "heat_capacity": 224,
+            "fuel_capacity": 8
+        }
+    },
+    {
+        "name": "Federal Corvette",
+        "iconName": "federal_corvette",
+        "description": "The Federal Corvette is one of the most powerful combat ships on the market. With a total of seven hardpoints, the ship has few rivals in terms of damage output, and is remarkably manoeuvrable given its size. Despite its comparatively small jump range, owning a Corvette is the ultimate ambition of many independent combat pilots, its astonishing power making it one of the most formidable vessels in the galaxy.",
+        "manufacturerName": "Core Dynamics",
+        "details": {
+            "years_produced": "3301-Present",
+            "type": "Combat",
+            "landing_pad_size": "large",
+            "dimensions": "167.8m x 87.2m x 28.3m",
+            "pilot_seats": 4,
+            "hull_mass": 900,
+            "shields": 519,
+            "heat_capacity": 333,
+            "fuel_capacity": 32
+        }
+    },
+    {
+        "name": "Diamondback Scout",
+        "iconName": "diamondback_scout",
+        "description": "Developed by Lakon Spaceways, the Diamondback Scout is a dual-purpose combat and exploration ship. Its 30 light-year jump range makes it popular with aspiring explorers, while its exceptional manoeuvrability makes it excellent at evading incoming fire. And with two medium and two small hardpoints, the Scout can also pack a punch.",
+        "manufacturerName": "Lakon Spaceways",
+        "details": {
+            "years_produced": "3300-Present",
+            "type": "Combat Explorer",
+            "landing_pad_size": "small",
+            "dimensions": "39.0m x 24.3m x 12.3m",
+            "pilot_seats": 1,
+            "hull_mass": 170,
+            "shields": 92,
+            "heat_capacity": 346,
+            "fuel_capacity": 16
+        }
+    },
+    {
+        "name": "Cobra Mk III",
+        "iconName": "cobra_mkIII",
+        "description": "A true multipurpose ship, the Cobra Mk III can fit comfortably into a range of roles. In combat it can hit hard and - if necessary - make a swift exit, while its spacious cargo hold allows it to carry more than other ships of similar price and size. The Cobra is also a solid choice for explorers, boasting an ample fuel tank and six internal compartments.",
+        "manufacturerName": "Faulcon DeLacy",
+        "details": {
+            "years_produced": "3100-Present",
+            "type": "Multipurpose",
+            "landing_pad_size": "small",
+            "dimensions": "27.1m x 44.0m x 7.9m",
+            "pilot_seats": 2,
+            "hull_mass": 180,
+            "shields": 92,
+            "heat_capacity": 225,
+            "fuel_capacity": 16
+        }
+    }
+]

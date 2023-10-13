@@ -1,4 +1,4 @@
-import Logo from '@/components/logo/logo';
+import Icon from '@/components/icon/icon';
 import styles from './newsTicker.module.css';
 
 const headlines = [
@@ -23,7 +23,7 @@ export default function NewsTicker() {
                                 headlines.map(headline => {
                                     return <div key={headline} className="text-sm whitespace-nowrap flex gap-8 items-center">
                                         {headline}
-                                        <Logo type="galnet" className="text-sky-600 h-6 w-6"></Logo>
+                                        <Icon name="galnet" className="text-sky-600 h-6 w-6"></Icon>
                                     </div>
                                 })
                             }

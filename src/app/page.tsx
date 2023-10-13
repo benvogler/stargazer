@@ -1,7 +1,7 @@
 'use client';
 
 import Welcome from '@/components/welcome/welcome';
-import Logo from '@/components/logo/logo';
+import Icon from '@/components/icon/icon';
 import NewsTicker from '@/components/newsTicker/newsTicker';
 import VolumeControl from '@/components/volumeControl/volumeControl';
 import LandingPads from '@/components/landingPads/landingPads';
@@ -28,7 +28,7 @@ export default function Home() {
                 <div className={styles.interface + ' flex flex-col justify-between max-h-full overflow-y-auto'}>
                     <div className="flex justify-between">
                         <div className="flex gap-2 items-center">
-                            <Logo type="federation" className="text-sky-500 h-14 w-14"></Logo>
+                            <Icon name="federation" className="text-sky-500 h-14 w-14"></Icon>
                             <div className="flex flex-col justify-center">
                                 <h1 className="text-lg text-sky-300 tracking-normal">
                                     Stargazer Station
@@ -38,7 +38,7 @@ export default function Home() {
                         </div>
                         <VolumeControl></VolumeControl>
                     </div>
-                    <div className="py-4 min-h-[1px] z-10">
+                    <div className="py-4 min-h-[1px] z-10 flex">
                         <LandingPads onDeparture={landingPad => handleLandingPadDeparture(landingPad, state)}></LandingPads>
                         <Notifications notifications={notifications} setNotifications={setNotifications} removeNotification={(notification: any) => removeNotification(notification, state)}></Notifications>
                         <Welcome></Welcome>
