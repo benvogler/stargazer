@@ -6,7 +6,6 @@ import NewsTicker from '@/components/newsTicker/newsTicker';
 import VolumeControl from '@/components/volumeControl/volumeControl';
 import LandingPads from '@/components/landingPads/landingPads';
 
-import './globals.css'
 import styles from './page.module.css';
 import { SettingsStore, useSettingsStore } from '@/stores/settings';
 import { useRef, useState } from 'react';

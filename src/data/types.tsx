@@ -98,21 +98,21 @@ export class ShipModelDetails {
 export class Pad extends Model {
     public number: string;
     public size: 'small' | 'medium' | 'large';
-    public occupant?: Ship;
-    public constructor({number, size, occupant}: {number: string, size: 'small' | 'medium' | 'large', occupant?: Ship}) {
+    public permit?: Permit;
+    public constructor({number, size, permit}: {number: string, size: 'small' | 'medium' | 'large', permit?: Permit}) {
         super();
         this.number = number;
         this.size = size;
-        this.occupant = occupant;
+        this.permit = permit;
     }
 };
 
 export class Permit extends Model {
-    public ship: ShipModel;
+    public ship: Ship;
     public pad: Pad;
     public start: EpochTimeStamp;
     public end: EpochTimeStamp;
-    public constructor({ship, pad, start, end}: {ship: ShipModel, pad: Pad, start: EpochTimeStamp, end: EpochTimeStamp}) {
+    public constructor({ship, pad, start, end}: {ship: Ship, pad: Pad, start: EpochTimeStamp, end: EpochTimeStamp}) {
         super();
         this.ship = ship;
         this.pad = pad;
@@ -127,14 +127,12 @@ export class Ship extends Model {
     public callsign: string;
     public status: 'Requesting Permit' | 'Permit Granted' | 'Permit Denied' | 'Docking' | 'Idle' | 'Undocking' | 'Exited System' | 'Anomalous' | 'Wanted';
     public permit?: Permit;
-    public pad?: Pad;
-    public constructor({captain, craft, callsign, status, permit, pad}: {captain: string, craft: ShipModel, callsign: string, status: any, permit?: Permit, pad?: Pad}) {
+    public constructor({captain, craft, callsign, status, permit}: {captain: string, craft: ShipModel, callsign: string, status: any, permit?: Permit}) {
         super();
         this.captain = captain;
         this.craft = craft;
         this.callsign = callsign;
         this.status = status;
         this.permit = permit;
-        this.pad = pad;
     }
 }

@@ -2,7 +2,7 @@ import { uniqueNamesGenerator, names } from 'unique-names-generator';
 import { StoreApi, UseBoundStore, create as createStore } from 'zustand';
 
 import { leftPad } from "@/utils/utils";
-import { Ship, Pad } from '@/data/types';
+import { Ship, Pad, Permit } from '@/data/types';
 import { ShipModels } from '@/data/ships';
 
 function createPads(): Pad[] {
@@ -37,10 +37,16 @@ function createShips(pads: Pad[]): Ship[] {
             captain: uniqueNamesGenerator({ dictionaries: [names] }) + ' ' + uniqueNamesGenerator({ dictionaries: [names] }),
             craft: ShipModels[Math.round(Math.random() * (ShipModels.length - 1))],
             callsign: createCallsign(),
-            pad: pads[Math.round(Math.random() * (pads.length - 1))],
             status: status < 0.1 ? 'Anomalous' : status >= 0.1 && status < 0.2 ? 'Wanted' : 'Idle'
         });
-        ship.pad!.occupant = ship;
+        const remainingPads = pads.filter(pad => !pad.permit);
+        ship.permit = new Permit({
+            ship,
+            pad: remainingPads[Math.round(Math.random() * (remainingPads.length - 1))],
+            start: new Date().getTime(),
+            end: new Date().getTime() + 60 * 60 * 60 * 1000
+        });
+        ship.permit.pad.permit = ship.permit;
         ships.push(ship);
     }
     return ships;
@@ -51,7 +57,8 @@ export type StationStore = {
     pads: Pad[]
 };
 const pads = createPads();
+const ships = createShips(pads);
 export const useStationStore: UseBoundStore<StoreApi<StationStore>> = createStore(set => ({
     pads,
-    ships: createShips(pads),
+    ships,
 }));
