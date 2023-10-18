@@ -40,7 +40,7 @@ export default function Home() {
                         <SettinsControl></SettinsControl>
                     </div>
                     <div className="py-4 min-h-[1px] z-10">
-                        <div className="flex relative h-full">
+                        <div className="grid relative h-full" style={{gridTemplateColumns: 'max-content 1fr 0 0'}}>
                             <LandingPads></LandingPads>
                             <Radar></Radar>
                             <Notifications></Notifications>

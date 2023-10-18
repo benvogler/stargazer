@@ -43,3 +43,8 @@
     transform-style: preserve-3d;
     pointer-events: none;
 }
+
+.iconContainer {
+    position: absolute;
+    transform-style: preserve-3d;
+}
