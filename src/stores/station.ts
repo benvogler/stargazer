@@ -139,6 +139,7 @@ function handleShipArrival(publish: NotificationsStore['publish']): void {
         return;
     }
     const ship = createShip(state.pads);
+    const status = ship.status;
     ship.status = 'Docking';
     pads = [...state.pads];
     set({pads});
@@ -146,7 +147,7 @@ function handleShipArrival(publish: NotificationsStore['publish']): void {
     publish(new Notification({body: `${name} is arriving at pad ${ship.permit!.pad.number}`}));
     window.setTimeout(() => {
         publish(new Notification({body: `${name} has arrived at pad ${ship.permit!.pad.number}`}));
-        ship.status = 'Idle';
+        ship.status = status;
         pads = [...state.pads];
         set({pads});
     }, 10000 + (Math.random() * 30000));
