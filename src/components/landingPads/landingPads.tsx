@@ -1,5 +1,4 @@
 import Icon from "@/components/icon/icon";
-import { useEffect, useState } from "react";
 import { StationStore, useStationStore } from '@/stores/station';
 import { ExclamationCircleIcon, ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { useStore } from "@/utils/utils";
@@ -8,13 +7,15 @@ export default function LandingPads() {
     const pads = useStore(useStationStore, (state: StationStore) => state.pads);
     return (
         <div className="bg-sky-950 bg-opacity-25 max-h-full overflow-y-auto border border-white border-opacity-5 basis-1/2 max-w-md p-4 whitespace-nowrap">
+            <div className="opacity-50 hidden"></div>
             Landing Pads
             {
                 pads?.map(pad => {
                     let classes = [
                         'flex flex-col',
                         pad.permit?.ship.status === 'Anomalous' ? 'text-yellow-300' : null,
-                        pad.permit?.ship.status === 'Wanted' ? 'text-red-300' : null
+                        pad.permit?.ship.status === 'Wanted' ? 'text-red-300' : null,
+                        ['Docking', 'Undocking'].includes(pad.permit?.ship.status || '')  ? 'opacity-50' : null
                     ].filter(_ => _).join(' ');
                     return (
                         <div className={classes} key={pad.id}>

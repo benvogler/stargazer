@@ -12,10 +12,10 @@ export default function Notifications() {
     const [ beepSfx ] = useSound(Sounds.beep, {volume: 0.5});
     initializeSounds && initializeSounds(mute, beepSfx);
     return (
-        <div className="flex flex-col items-center fixed bottom-16">
+        <div className="flex flex-col absolute bottom-0 right-0 items-center min-w-[320px] w-max-content">
             {
                 notifications && notifications.map(notification => notification && (
-                    <div className={`${styles.notification} bg-sky-950 z-10 border border-white border-opacity-5 p-2 flex items-center overflow-hidden ${notification.className}`} key={notification.body}>
+                    <div className={`${styles.notification} bg-sky-950 z-10 border border-white border-opacity-5 flex items-center overflow-hidden ${notification.className}`} key={notification.body}>
                         <span>
                             {notification.body}
                         </span>

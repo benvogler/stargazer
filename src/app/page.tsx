@@ -17,8 +17,8 @@ import { useStationStore } from '@/stores/station';
 export default function Home() {
     const mute = useSettingsStore((state: SettingsStore) => state.mute);
     const publish = useStore(useNotificationsStore, store => store.publish)!;
-    const startShipDepartures = useStore(useStationStore, store => store.startShipDepartures)!;
-    startShipDepartures && startShipDepartures(publish);
+    const startShipActivities = useStore(useStationStore, store => store.startShipActivities)!;
+    startShipActivities && startShipActivities(publish);
     return (
         <main>
             <div className={styles.backgroundVignette}></div>
@@ -39,10 +39,12 @@ export default function Home() {
                         </div>
                         <VolumeControl></VolumeControl>
                     </div>
-                    <div className="py-4 min-h-[1px] z-10 flex">
-                        <LandingPads></LandingPads>
-                        <Notifications></Notifications>
-                        <Welcome></Welcome>
+                    <div className="py-4 min-h-[1px] z-10">
+                        <div className="flex relative h-full">
+                            <LandingPads></LandingPads>
+                            <Notifications></Notifications>
+                            <Welcome></Welcome>
+                        </div>
                     </div>
                     <div>
                         <NewsTicker></NewsTicker>
