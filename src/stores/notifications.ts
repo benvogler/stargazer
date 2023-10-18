@@ -21,12 +21,20 @@ export class Notification {
     public get className() {
         return this._className;
     }
+    private _expirationTime?: number;
+    protected set expirationTime(value) {
+        this._expirationTime = value;
+    }
+    public get expirationTime() {
+        return this._expirationTime;
+    }
     private static mute: boolean;
     private static beepSfx: any;
     public static publish(notification: Notification): void {
         if (!notification) {
             return;
         }
+        notification.expirationTime = new Date().getTime() + notification.duration * 1000;
         notifications = [
             notification,
             ...state.notifications

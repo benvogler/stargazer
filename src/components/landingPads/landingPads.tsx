@@ -2,6 +2,7 @@ import Icon from "@/components/icon/icon";
 import { StationStore, useStationStore } from '@/stores/station';
 import { ExclamationCircleIcon, ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { useStore } from "@/utils/utils";
+import { ArrowLeftOnRectangleIcon, ArrowRightOnRectangleIcon } from "@heroicons/react/24/solid";
 
 export default function LandingPads() {
     const pads = useStore(useStationStore, (state: StationStore) => state.pads);
@@ -44,6 +45,12 @@ export default function LandingPads() {
                                             : <></>}
                                         {pad.permit?.ship.status === 'Wanted' ?
                                             <ExclamationCircleIcon className="h-8 w-8"></ExclamationCircleIcon>
+                                            : <></>}
+                                        {pad.permit?.ship.status === 'Docking' ?
+                                            <ArrowLeftOnRectangleIcon className="h-8 w-8"></ArrowLeftOnRectangleIcon>
+                                            : <></>}
+                                        {pad.permit?.ship.status === 'Undocking' ?
+                                            <ArrowRightOnRectangleIcon className="h-8 w-8"></ArrowRightOnRectangleIcon>
                                             : <></>}
                                     </span>
                                 </div>
