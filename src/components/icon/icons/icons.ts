@@ -1,4 +1,4 @@
-
+export { default as asteroid_station } from './asteroid_station.svg';
 export { default as beluga_liner } from './beluga_liner.svg';
 export { default as cobra_mkIII } from './cobra_mkIII.svg';
 export { default as diamondback_scout } from './diamondback_scout.svg';

@@ -7,7 +7,7 @@ import { ArrowLeftOnRectangleIcon, ArrowRightOnRectangleIcon } from "@heroicons/
 export default function LandingPads() {
     const pads = useStore(useStationStore, (state: StationStore) => state.pads);
     return (
-        <div className="bg-sky-950 bg-opacity-25 max-h-full overflow-y-auto border border-white border-opacity-5 basis-1/2 max-w-md p-4 whitespace-nowrap">
+        <div className="bg-sky-950 bg-opacity-25 max-h-full overflow-y-auto border border-white border-opacity-5 max-w-md flex-grow p-4 whitespace-nowrap">
             <div className="opacity-50 hidden"></div>
             Landing Pads
             {

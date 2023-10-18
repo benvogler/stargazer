@@ -12,6 +12,7 @@ import Notifications from '@/components/notifications/notifications';
 import { useStore } from '@/utils/utils';
 import { useNotificationsStore } from '@/stores/notifications';
 import { useStationStore } from '@/stores/station';
+import Radar from '@/components/radar/radar';
 
 export default function Home() {
     const { mute, privacy } = useSettingsStore((state: SettingsStore) => state);
@@ -41,6 +42,7 @@ export default function Home() {
                     <div className="py-4 min-h-[1px] z-10">
                         <div className="flex relative h-full">
                             <LandingPads></LandingPads>
+                            <Radar></Radar>
                             <Notifications></Notifications>
                             <Welcome></Welcome>
                         </div>

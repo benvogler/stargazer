@@ -103,6 +103,8 @@ function handleDrag(event: any) {
 function closeWelcomeMessage(minimizeSfx: () => void, mute: boolean) {
     let modal: any = document.querySelector('#welcomeModal')!;
     modal.classList.add(styles.closeWelcomeMessage);
+    let wrapper: any = document.querySelector(`.${styles.welcomeMessageWrapper}`);
+    wrapper.classList.add(styles.closed);
     modal.style.animation = 'none';
     modal.children[0].style.animation = 'none';
     window.setTimeout(() => {

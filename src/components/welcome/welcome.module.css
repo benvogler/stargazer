@@ -7,6 +7,10 @@
     justify-content: center;
 }
 
+.welcomeMessageWrapper.closed {
+    pointer-events: none;
+}
+
 .welcomeMessageWrapper :global {
     animation-name: breathe3d;
     animation-duration: 17s;
@@ -50,6 +54,7 @@
     max-height: 25vh;
     padding: 1rem;
     opacity: 1;
+    pointer-events: none;
 }
 
 .closeWelcomeMessage :global {

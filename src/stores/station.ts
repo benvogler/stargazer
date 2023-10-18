@@ -100,11 +100,9 @@ function handleShipDeparture(publish: NotificationsStore['publish']): void {
     window.setTimeout(() => handleShipDeparture(publish), 5000 + (Math.random() * 5000));
     if (Math.random() < (0.95 - pity.departure)) {
         pity.departure += 0.025;
-        console.log('skip departure', pity.departure);
         return;
     }
     pity.departure = 0;
-    console.log('departing', pity.departure);
     const filledPads = state.pads.filter(pad => pad.permit);
     if (filledPads.length === 0) {
         return;
@@ -129,11 +127,9 @@ function handleShipArrival(publish: NotificationsStore['publish']): void {
     window.setTimeout(() => handleShipArrival(publish), 5000 + (Math.random() * 5000));
     if (Math.random() < (0.95 - pity.arrival)) {
         pity.arrival += 0.025;
-        console.log('skip arrival', pity.arrival);
         return;
     }
     pity.arrival = 0;
-    console.log('arriving', pity.arrival);
     const emptyPads = state.pads.filter(pad => !pad.permit);
     if (emptyPads.length === 0) {
         return;
