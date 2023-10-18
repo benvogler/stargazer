@@ -14,13 +14,22 @@ export default function Radar() {
                         <div className={styles.circle + ' border-2 border-sky-400 rounded-full'}></div>
                         <div className={styles.circle + ' border-2 border-sky-400 rounded-full'}></div>
                         <span className={styles.station}>
-                            <Icon className="h-[20%] w-[20%]" name="asteroid_station" style={{transform: 'rotateZ(0deg) rotateY(-27deg) rotateX(13deg)'}}></Icon>
+                            <div className="flex flex-col items-center justify-center w-min" style={{transform: 'rotateZ(0deg) rotateY(-27deg) rotateX(13deg)'}}>
+                                Stargazer
+                                <Icon className="h-[6vh] w-[6vh]" name="asteroid_station"></Icon>
+                            </div>
                         </span>
-                        <span className={`${styles.iconContainer} left-[20%] top-[60%] h-[10%] w-[10%]`} style={{transform: 'translateZ(100px)'}}>
-                            <Icon name="cobra_mkIII" style={{transform: 'rotateZ(0deg) rotateY(-27deg) rotateX(13deg)'}}></Icon>
+                        <span className={`${styles.iconContainer} left-[20%] top-[60%] whitespace-nowrap`} style={{transform: 'translateZ(100px)'}}>
+                            <div className="flex flex-col items-center justify-center w-min" style={{transform: 'rotateZ(0deg) rotateY(-27deg) rotateX(13deg)'}}>
+                                DeLacy RMJ
+                                <Icon className="h-[5vh] w-[5vh]" name="cobra_mkIII"></Icon>
+                            </div>
                         </span>
-                        <span className={`${styles.iconContainer} left-[70%] top-[20%] h-[10%] w-[10%]`} style={{transform: 'translateZ(-220px)'}}>
-                            <Icon name="fer_de_lance" style={{transform: 'rotateZ(0deg) rotateY(-27deg) rotateX(13deg)'}}></Icon>
+                        <span className={`${styles.iconContainer} left-[70%] top-[20%] whitespace-nowrap`} style={{transform: 'translateZ(-220px)'}}>
+                            <div className="flex flex-col items-center justify-center w-min" style={{transform: 'rotateZ(0deg) rotateY(-27deg) rotateX(13deg)'}}>
+                                Zorgon DZR
+                                <Icon className="h-[5vh] w-[5vh]" name="fer_de_lance"></Icon>
+                            </div>
                         </span>
                     </div>
                 </div>
@@ -67,7 +76,7 @@ function handleDrag(event: any) {
         `rotateY(${rotateY}deg)`,
         `rotateZ(0deg)`
     ].join(' ');
-    document.querySelectorAll(`.${styles.container} svg`).forEach((element: any) => {
+    document.querySelectorAll(`.${styles.iconContainer} > div, .${styles.station} > div`).forEach((element: any) => {
         element.style.transform = element.style.transform.replace(/rotateY\([-]?[0-9]*deg\)/, `rotateY(${-1 * rotateY}deg)`);
         element.style.transform = element.style.transform.replace(/rotateX\([-]?[0-9]*deg\)/, `rotateX(${-1 * rotateX}deg)`);
     });
