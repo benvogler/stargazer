@@ -1,6 +1,6 @@
 .ring {
     stroke-dasharray: 400, 400;
-    transition: stroke-dashoffset 0.35s;
+    transition: stroke-dashoffset 1s linear;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
 }

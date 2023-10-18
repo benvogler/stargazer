@@ -18,7 +18,7 @@ export default function Notifications() {
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(new Date());
-        }, 200);
+        }, 1000);
         return () => clearInterval(interval);
     }, []);
     let [progresses, setProgresses]: [Map<number, number>, (progresses: Map<number, number>) => void] = useState(new Map());

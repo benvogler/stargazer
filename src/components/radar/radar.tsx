@@ -5,7 +5,7 @@ export default function Radar() {
     return (
         <div className="border-white border-opacity-10 border ml-4 p-8 bg-sky-950 bg-opacity-25 cursor-grab aspect-square flex-grow h-min"  draggable onDragStart={handleDragStart} onDrag={handleDrag}>
             <div className={styles.container}>
-                <div id="sphere" className={styles.sphere} style={{transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'}}>
+                <div id="sphere" className={styles.sphere} style={{transform: 'rotateX(-13deg) rotateY(27deg) rotateZ(0deg)'}}>
                     <div className={styles.circle + ' border-2 border-sky-400 rounded-full'}></div>
                     <div className={styles.circle + ' border-2 border-sky-400 rounded-full'}></div>
                     <div className={styles.circle + ' border-2 border-sky-400 rounded-full'}></div>
