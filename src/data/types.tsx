@@ -6,9 +6,6 @@ class Model {
     }
     private static latestId: number = 0;
     private _id: number;
-    private set id(value) {
-        this._id = value;
-    }
     public get id() {
         return this._id;
     }

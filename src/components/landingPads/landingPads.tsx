@@ -4,21 +4,8 @@ import { StationStore, useStationStore } from '@/stores/station';
 import { ExclamationCircleIcon, ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { useStore } from "@/utils/utils";
 
-export default function LandingPads({onDeparture} : {onDeparture: (landingPad: any) => void}) {
+export default function LandingPads() {
     const pads = useStore(useStationStore, (state: StationStore) => state.pads);
-    // const [ departureInterval, setDepartureInterval ]: [any, any] = useState(null);
-    // useEffect(() => {
-    //     reactiveLandingPads = landingPads;
-    //     if (!departureInterval && !locked) {
-    //         locked = true;
-    //         window.setTimeout(() => {
-    //             setDepartureInterval(
-    //                 window.setInterval(() => applyRandomDepartures(reactiveLandingPads, setLandingPads, onDeparture), 1000)
-    //             );
-    //             console.log('created interval');
-    //         }, 10000);
-    //     }
-    // }, [landingPads, departureInterval, onDeparture])
     return (
         <div className="bg-sky-950 bg-opacity-25 max-h-full overflow-y-auto border border-white border-opacity-5 basis-1/2 max-w-md p-4 whitespace-nowrap">
             Landing Pads
@@ -67,18 +54,3 @@ export default function LandingPads({onDeparture} : {onDeparture: (landingPad: a
         </div>
     )
 }
-
-// function applyRandomDepartures(landingPads: any[], setLandingPads: (landingPads: any[]) => void, onDeparture: (landingPad: any) => void) {
-//     if (Math.random() < 0.95) {
-//         return;
-//     }
-//     const filledPads = landingPads.filter(pad => pad.occupied);
-//     if (filledPads.length === 0) {
-//         return;
-//     }
-//     const departingPad = filledPads[Math.round(Math.random() * (filledPads.length - 1))];
-//     departingPad.occupied = false;
-//     onDeparture && onDeparture(departingPad);
-//     console.log(departingPad, 'departed');
-//     setLandingPads(JSON.parse(JSON.stringify(landingPads)));
-// }

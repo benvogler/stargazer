@@ -4,6 +4,7 @@ import { StoreApi, UseBoundStore, create as createStore } from 'zustand';
 import { leftPad } from "@/utils/utils";
 import { Ship, Pad, Permit } from '@/data/types';
 import { ShipModels } from '@/data/ships';
+import { Notification, type NotificationsStore } from './notifications';
 
 function createPads(): Pad[] {
     type PadCount = {
@@ -11,13 +12,13 @@ function createPads(): Pad[] {
         amount: number;
     }
     let padCounts: Array<PadCount> = [{size: 'small', amount: 4}, {size: 'medium', amount: 8}, {size: 'large', amount: 6}];
-    const pads: Pad[] = [];
+    const createdPads: Pad[] = [];
     for (let padCount of padCounts) {
         for (let i = 0; i < padCount.amount; i++) {
-            pads.push(new Pad({number: leftPad(pads.length + 1), size: padCount.size}));
+            createdPads.push(new Pad({number: leftPad(createdPads.length + 1), size: padCount.size}));
         }
     }
-    return pads;
+    return createdPads;
 }
 
 function createCallsign(): string {
@@ -26,9 +27,9 @@ function createCallsign(): string {
     return [rand(), rand(), rand()].join('');
 }
 
-function createShips(pads: Pad[]): Ship[] {
+function createShips(createdPads: Pad[]): Ship[] {
     const ships: Ship[] = [];
-    for (let i = 1; i < pads.length; i++) {
+    for (let i = 1; i < createdPads.length; i++) {
         if (Math.random() < 0.33) {
             continue;
         }
@@ -39,7 +40,7 @@ function createShips(pads: Pad[]): Ship[] {
             callsign: createCallsign(),
             status: status < 0.1 ? 'Anomalous' : status >= 0.1 && status < 0.2 ? 'Wanted' : 'Idle'
         });
-        const remainingPads = pads.filter(pad => !pad.permit);
+        const remainingPads = createdPads.filter(pad => !pad.permit);
         ship.permit = new Permit({
             ship,
             pad: remainingPads[Math.round(Math.random() * (remainingPads.length - 1))],
@@ -54,11 +55,49 @@ function createShips(pads: Pad[]): Ship[] {
 
 export type StationStore = {
     ships: Ship[],
-    pads: Pad[]
+    pads: Pad[],
+    startShipDepartures: (pubilsh: NotificationsStore['publish']) => boolean
 };
 const pads = createPads();
 const ships = createShips(pads);
-export const useStationStore: UseBoundStore<StoreApi<StationStore>> = createStore(set => ({
+let set: any;
+let state: StationStore = {
     pads,
     ships,
-}));
+    startShipDepartures
+};
+export const useStationStore: UseBoundStore<StoreApi<StationStore>> = createStore(s => {
+    set = s;
+    return state;
+});
+
+let hasStartedDepartures = false;
+function startShipDepartures(publish: NotificationsStore['publish']): boolean {
+    if (hasStartedDepartures) {
+        return false;
+    }
+    hasStartedDepartures = true;
+    window.setTimeout(() => {
+        window.setInterval(() => {
+            if (Math.random() < 0.95) {
+                console.log('skip');
+                return;
+            }
+            const filledPads = state.pads.filter(pad => pad.permit);
+            if (filledPads.length === 0) {
+                return;
+            }
+            const departingPad = filledPads[Math.round(Math.random() * (filledPads.length - 1))];
+            const permit = departingPad.permit!;
+            const name = `${permit.ship.captain} (${permit.ship.craft.manufacturer!.name} ${permit.ship.callsign})`;
+            publish(new Notification({body: `${name} is departing pad ${departingPad.number}`}));
+            window.setTimeout(() => {
+                publish(new Notification({body: `${name} has departed pad ${departingPad.number}`}));
+                delete departingPad.permit!.ship.permit;
+                delete departingPad.permit;
+                set({pads: [...pads]});
+            }, Math.random() * 30000);
+        }, 10000);
+    }, 5000);
+    return true;
+}

@@ -8,15 +8,17 @@ import LandingPads from '@/components/landingPads/landingPads';
 
 import styles from './page.module.css';
 import { SettingsStore, useSettingsStore } from '@/stores/settings';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Notifications from '@/components/notifications/notifications';
+import { useStore } from '@/utils/utils';
+import { useNotificationsStore } from '@/stores/notifications';
+import { useStationStore } from '@/stores/station';
 
 export default function Home() {
-    const mute: boolean = useSettingsStore((state: SettingsStore) => state.mute);
-    // const [ notifications, setNotifications ] = useState([]);
-    const state: any = useRef();
-    // state.notifications = notifications;
-    // state.setNotifications = setNotifications;
+    const mute = useSettingsStore((state: SettingsStore) => state.mute);
+    const publish = useStore(useNotificationsStore, store => store.publish)!;
+    const startShipDepartures = useStore(useStationStore, store => store.startShipDepartures)!;
+    startShipDepartures && startShipDepartures(publish);
     return (
         <main>
             <div className={styles.backgroundVignette}></div>
@@ -38,8 +40,8 @@ export default function Home() {
                         <VolumeControl></VolumeControl>
                     </div>
                     <div className="py-4 min-h-[1px] z-10 flex">
-                        <LandingPads onDeparture={landingPad => handleLandingPadDeparture(landingPad, state)}></LandingPads>
-                        {/* <Notifications notifications={notifications} setNotifications={setNotifications} removeNotification={(notification: any) => removeNotification(notification, state)}></Notifications> */}
+                        <LandingPads></LandingPads>
+                        <Notifications></Notifications>
                         <Welcome></Welcome>
                     </div>
                     <div>
@@ -50,20 +52,3 @@ export default function Home() {
         </main>
     )
 }
-
-function handleLandingPadDeparture(landingPad: any, {notifications, setNotifications}: {notifications: any, setNotifications: (notifications: any) => void}) {
-    // notifications.push({
-    //     message: `${landingPad.name} is departing from landing pad ${landingPad.number}`
-    // });
-    // console.log('add', notifications);
-    // setNotifications(JSON.parse(JSON.stringify(notifications)));
-}
-
-// function removeNotification(notification: any, {notifications, setNotifications}: {notifications: any, setNotifications: (notifications: any) => void}) {
-//     console.log('remove', notification.timeout, notifications, notifications.filter((n: any) => n.timeout !== notification.timeout));
-//     setNotifications(
-//         JSON.parse(JSON.stringify(
-//             notifications.filter((n: any) => n.timeout !== notification.timeout)
-//         ))
-//     );
-// }

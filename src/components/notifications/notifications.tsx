@@ -1,26 +1,24 @@
-import { useEffect } from "react"
+const useSound = require('use-sound').default;
+import { useStore } from "@/utils/utils";
 
-export default function Notifications({notifications, removeNotification, setNotifications}: any) {
-    useEffect(() => {
-        let hasChanged = false;
-        for (let notification of notifications) {
-            if (!notification.timeout) {
-                hasChanged = true;
-                notification.timeout = window.setTimeout(() => {
-                    removeNotification(notification);
-                }, 10000);
-            }
-        }
-        if (hasChanged) {
-            setNotifications(JSON.parse(JSON.stringify(notifications)));
-        }
-    }, [notifications, removeNotification, setNotifications])
+import styles from './notifications.module.css';
+import { NotificationsStore, useNotificationsStore } from "@/stores/notifications";
+import { SettingsStore, useSettingsStore } from "@/stores/settings";
+import { Sounds } from "@/utils/audio";
+
+export default function Notifications() {
+    const { notifications, initializeSounds } = useStore(useNotificationsStore, (state: NotificationsStore) => state) || {};
+    const { mute } = useSettingsStore((state: SettingsStore) => state);
+    const [ beepSfx ] = useSound(Sounds.beep, {volume: 0.5});
+    initializeSounds && initializeSounds(mute, beepSfx);
     return (
-        <div className="flex flex-col gap-4 fixed bottom-16">
+        <div className="flex flex-col items-center fixed bottom-16">
             {
-                notifications.map((notification: any) => (
-                    <div className="bg-sky-950 z-10 border border-white border-opacity-5 p-2" key={notification.message}>
-                        {notification.message}
+                notifications && notifications.map(notification => notification && (
+                    <div className={`${styles.notification} bg-sky-950 z-10 border border-white border-opacity-5 p-2 flex items-center overflow-hidden ${notification.className}`} key={notification.body}>
+                        <span>
+                            {notification.body}
+                        </span>
                     </div>
                 ))
             }

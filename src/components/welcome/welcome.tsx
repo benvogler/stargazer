@@ -14,7 +14,7 @@ export default function Welcome() {
     useEffect(() => {
         setDate(new Date());
     }, [])
-    const { mute, toggleMute } = useSettingsStore((state: SettingsStore) => ({ mute: state.mute, toggleMute: state.toggleMute }));
+    const { mute } = useSettingsStore((state: SettingsStore) => state);
     useEffect(() => {
         let timer = setInterval(() => setDate(new Date()), 1000);
         return function cleanup() {
