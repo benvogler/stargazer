@@ -114,7 +114,7 @@ function handleShipDeparture(publish: NotificationsStore['publish']): void {
     permit.ship.status = 'Undocking';
     pads = [...state.pads];
     set({pads});
-    const name = `${permit.ship.captain} (${permit.ship.craft.manufacturer!.name} ${permit.ship.callsign})`;
+    const name = `${permit.ship.captain} (${permit.ship.craft.manufacturer!.shortName} ${permit.ship.callsign})`;
     publish(new Notification({body: `${name} is departing pad ${departingPad.number}`}));
     window.setTimeout(() => {
         publish(new Notification({body: `${name} has departed pad ${departingPad.number}`}));
@@ -143,7 +143,7 @@ function handleShipArrival(publish: NotificationsStore['publish']): void {
     ship.status = 'Docking';
     pads = [...state.pads];
     set({pads});
-    const name = `${ship.captain} (${ship.craft.manufacturer!.name} ${ship.callsign})`;
+    const name = `${ship.captain} (${ship.craft.manufacturer!.shortName} ${ship.callsign})`;
     publish(new Notification({body: `${name} is arriving at pad ${ship.permit!.pad.number}`}));
     window.setTimeout(() => {
         publish(new Notification({body: `${name} has arrived at pad ${ship.permit!.pad.number}`}));

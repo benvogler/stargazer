@@ -13,12 +13,14 @@ class Model {
 
 export class Manufacturer extends Model {
     public name: string;
+    public shortName: string;
     public iconName: string;
     public description: string;
     public details: ManufacturerDetails;
-    public constructor({name, iconName, description, details}: {name: string, iconName: string, description: string, details: ManufacturerDetails}) {
+    public constructor({name, iconName, description, details, shortName}: {name: string, iconName: string, description: string, details: ManufacturerDetails, shortName?: string}) {
         super();
         this.name = name;
+        this.shortName = shortName || name;
         this.iconName = iconName;
         this.description = description;
         this.details = details;

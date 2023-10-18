@@ -13,6 +13,7 @@
     },
     {
         "name": "Faulcon DeLacy",
+        "shortName": "DeLacy",
         "iconName": "faulcon_delacy",
         "description": "Faulcon DeLacy is an independent manufacturer of ships and equipment that is based in Reorte. They specialize in producing multipurpose and combat-oriented ships known for their ruggedness and reliability. The company was founded in the 28th century as Faulcon Manspace and made its name with the original Viper before rapidly expanding through a number of acquisitions including deLacy ShipWorks and Zorgon Peterson. By the 34th century, the company has become the largest of all ship manufacturers, as well as one of the most widespread and consistently admired corporations in the galaxy. Public regard for Faulcon deLacy is so high that the Alliance, Empire, and Federation have all attempted to secure exclusivity contracts, but without success.",
         "details": {
@@ -37,6 +38,7 @@
     },
     {
         "name": "Lakon Spaceways",
+        "shortName": "Lakon",
         "iconName": "lakon_spaceways",
         "description": "Lakon Spaceways is an Allied manufacturer of ships and equipment based in Alioth. It specialises in producing durable, utilitarian freighters and exploration vessels. Beginning in December 3303, the then-independent Lakon entered a partnership with the Alliance to develop new military craft to combat the Thargoids, resulting in the creation of the Type-10 Defender, Alliance Chieftain, Alliance Challenger, and Alliance Crusader. By February 3307, Lakon had become a key defence contractor for the Alliance Defence Force, and in the wake of financial troubles and a failed hostile takeover by Core Dynamics, the Alliance purchased a majority stake in Lakon to rescue the company from insolvency and block other acquisition attempts.",
         "details": {
@@ -49,6 +51,7 @@
     },
     {
         "name": "Zorgon Peterson",
+        "shortName": "Zorgon",
         "iconName": "zorgon_peterson",
         "description": "Zorgon Peterson is an independent manufacturer of ships and equipment in the galaxy. It produces a small yet eclectic range of ships, including small freighters and high-performance combat craft. It has been a fully-owned subsidiary of Faulcon DeLacy since 3126.",
         "details": {
@@ -61,6 +64,7 @@
     },
     {
         "name": "Saud Kruger",
+        "shortName": "Kruger",
         "iconName": "saud_kruger",
         "description": "Saud Kruger is an independent corporation based in Bedaho that manufactures luxury passenger ships and equipment for the wealthy in the galaxy. It runs its own shipyards in Bedaho and a number of other systems across independent and Imperial space. Its subsidiary, Astrogator Corporation, sells adventure holidays to the less wealthy. It also has a thriving star chart and exploration business.[2] Ships produced by Saud Kruger emphasize form over function for the sake of luxury, with designs incorporating tapering curves, tinted windows, and glossy white exteriors. Saud Kruger liners are also the only ships that can be fitted with luxury-class Passenger Cabin suites.",
         "details": {

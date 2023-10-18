@@ -25,7 +25,7 @@ export default function Home() {
                 <source src="background.mp4" type="video/mp4"></source>
             </video>
             <div className={styles.interfaceWrapper}>
-                <div className={`${styles.interface} flex flex-col justify-between max-h-full overflow-y-auto transition-all ${privacy ? 'backdrop-blur-[3vh]' : 'backdrop-blur-none'}`}>
+                <div className={`${styles.interface} flex select-none flex-col justify-between max-h-full overflow-y-auto transition-all ${privacy ? 'backdrop-blur-[3vh]' : 'backdrop-blur-none'}`}>
                     <div className="flex justify-between items-center">
                         <div className="flex gap-2 items-center">
                             <Icon name="federation" className="text-sky-500 h-14 w-14"></Icon>
