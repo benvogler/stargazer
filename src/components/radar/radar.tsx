@@ -1,12 +1,16 @@
 import Icon from '@/components/icon/icon';
 import styles from './radar.module.css';
 import { useEffect, useState } from 'react';
+import { useStore } from '@/utils/utils';
+import { StationStore, useStationStore } from '@/stores/station';
 
 export default function Radar() {
-    const [rotation, setRotation] = useState({x: -13, y: 27});
+    const [rotation, setRotation] = useState({x: -33, y: 27});
     const [dragging, setDragging] = useState(false);
     const [time, setTime] = useState(new Date());
     const [autoRotateTimeout, setAutoRotateTimeout] = useState(0);
+    const [positions, setPositions]: [any, any] = useState({});
+    const ships = useStore(useStationStore, (state: StationStore) => state.ships);
     useEffect(() => {
         if (!dragging && !autoRotateTimeout) {
             setRotation({
@@ -22,12 +26,16 @@ export default function Radar() {
         }, 1000);
         return () => clearInterval(interval);
     }, []);
+    const filteredShips = ships?.filter(ship => ['Docking', 'Exited Station'].includes(ship.status));
     return (
         <div className="border-white border-opacity-10 border ml-4 p-4 bg-sky-950 bg-opacity-25 aspect-square h-[70vh] w-[70vh]">
-            <span>
+            <p>
                 Station Radar
-            </span>
-            <div className="cursor-grab h-full w-full p-4" onMouseDown={event => handleDragStart(event, rotation, setDragging)} onMouseMove={event => handleDrag(event, setRotation, dragging)} onMouseUp={event => handleDrop(event, setDragging)} onMouseLeave={event => handleDrop(event, setDragging)}>
+            </p>
+            <p className="h-0">
+                {filteredShips?.length || 'No'} Contact{filteredShips?.length === 1 ? '' : 's'}
+            </p>
+            <div className="cursor-grab h-full w-full p-4 overflow-hidden" onMouseDown={event => handleDragStart(event, rotation, setDragging)} onMouseMove={event => handleDrag(event, setRotation, dragging)} onMouseUp={event => handleDrop(event, setDragging)} onMouseLeave={event => handleDrop(event, setDragging)}>
                 <div className={styles.container}>
                     <div id="sphere" className={`${styles.sphere} ${dragging ? '' : 'transition-all ease-linear duration-1000'}`} style={{transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) rotateZ(0deg)`}}>
                         <div className={styles.circle + ' border-2 border-sky-400 rounded-full'}></div>
@@ -39,18 +47,29 @@ export default function Radar() {
                                 <Icon className="h-[6vh] w-[6vh]" name="asteroid_station"></Icon>
                             </div>
                         </span>
-                        <span className={`${styles.iconContainer} left-[20%] top-[60%] whitespace-nowrap`} style={{transform: 'translateZ(100px)'}}>
-                            <div className="flex flex-col items-center justify-center w-min" style={{transform: `rotateZ(0deg) rotateY(${rotation.y * -1}deg) rotateX(${rotation.x * -1}deg)`}}>
-                                DeLacy RMJ
-                                <Icon className="h-[5vh] w-[5vh]" name="cobra_mkIII"></Icon>
-                            </div>
-                        </span>
-                        <span className={`${styles.iconContainer} left-[70%] top-[20%] whitespace-nowrap`} style={{transform: 'translateZ(-220px)'}}>
-                            <div className="flex flex-col items-center justify-center w-min" style={{transform: `rotateZ(0deg) rotateY(${rotation.y * -1}deg) rotateX(${rotation.x * -1}deg)`}}>
-                                Zorgon DZR
-                                <Icon className="h-[5vh] w-[5vh]" name="fer_de_lance"></Icon>
-                            </div>
-                        </span>
+                        {
+                            filteredShips?.map(ship => {
+                                if (!positions[ship.id]) {
+                                    const getRandomPosition = () => (10 + (Math.random() * 80)) * (Math.random() >= 0.5 ? -1 : 1);
+                                    positions[ship.id] = {
+                                        x: getRandomPosition(),
+                                        y: getRandomPosition(),
+                                        z: Math.random() * 300
+                                    };
+                                    setPositions(positions);
+                                    console.log({positions})
+                                }
+                                let {x,y,z} = positions[ship.id];
+                                return (
+                                    <span key={ship.id} className={`${styles.iconContainer} left-[${y}%] top-[${x}%] whitespace-nowrap`} style={{transform: `translateZ(${z}px)`}}>
+                                        <div className="flex flex-col items-center justify-center w-min" style={{transform: `rotateZ(0deg) rotateY(${rotation.y * -1}deg) rotateX(${rotation.x * -1}deg)`}}>
+                                            {`${ship.craft.manufacturer?.shortName} ${ship.callsign}`}
+                                            <Icon className="h-[5vh] w-[5vh]" name={ship.craft.iconName}></Icon>
+                                        </div>
+                                    </span>
+                                )
+                            })
+                        }
                     </div>
                 </div>
             </div>

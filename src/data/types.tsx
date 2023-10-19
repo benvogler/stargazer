@@ -124,7 +124,7 @@ export class Ship extends Model {
     public captain: string;
     public craft: ShipModel;
     public callsign: string;
-    public status: 'Requesting Permit' | 'Permit Granted' | 'Permit Denied' | 'Docking' | 'Idle' | 'Undocking' | 'Exited System' | 'Anomalous' | 'Wanted';
+    public status: 'Requesting Permit' | 'Permit Granted' | 'Permit Denied' | 'Docking' | 'Idle' | 'Undocking' | 'Exited Station' | 'Exited System' | 'Anomalous' | 'Wanted';
     public permit?: Permit;
     public constructor({captain, craft, callsign, status, permit}: {captain: string, craft: ShipModel, callsign: string, status: any, permit?: Permit}) {
         super();
