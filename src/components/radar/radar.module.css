@@ -38,8 +38,8 @@
 
 .station {
     position: absolute;
-    left: calc(50% - 1.5rem);
-    top: calc(50% - 1.5rem);
+    left: calc(50% - 3rem);
+    top: calc(50% - 3rem);
     transform-style: preserve-3d;
     pointer-events: none;
 }

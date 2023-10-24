@@ -16,7 +16,7 @@ export default function LandingPads() {
                         'flex flex-col',
                         pad.permit?.ship.status === 'Anomalous' ? 'text-yellow-300' : null,
                         pad.permit?.ship.status === 'Wanted' ? 'text-red-300' : null,
-                        ['Docking', 'Undocking'].includes(pad.permit?.ship.status || '')  ? 'opacity-50' : null
+                        ['Docking', 'Undocking', 'Entering System'].includes(pad.permit?.ship.status || '')  ? 'opacity-50' : null
                     ].filter(_ => _).join(' ');
                     return (
                         <div className={classes} key={pad.id}>
@@ -46,7 +46,7 @@ export default function LandingPads() {
                                         {pad.permit?.ship.status === 'Wanted' ?
                                             <ExclamationCircleIcon className="h-8 w-8"></ExclamationCircleIcon>
                                             : <></>}
-                                        {pad.permit?.ship.status === 'Docking' ?
+                                        {['Docking', 'Entering System'].includes(pad.permit?.ship.status!) ?
                                             <ArrowLeftOnRectangleIcon className="h-8 w-8"></ArrowLeftOnRectangleIcon>
                                             : <></>}
                                         {pad.permit?.ship.status === 'Undocking' ?

@@ -19,14 +19,14 @@ export default function Radar() {
             });
             setAutoRotateTimeout(window.setTimeout(() => setAutoRotateTimeout(0), 1000));
         }
-    }, [dragging, autoRotateTimeout]);
+    }, [dragging, autoRotateTimeout, rotation]);
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(new Date());
         }, 1000);
         return () => clearInterval(interval);
     }, []);
-    const filteredShips = ships?.filter(ship => ['Docking', 'Exited Station'].includes(ship.status));
+    const filteredShips = ships?.filter(ship => ['Entering Station', 'Exited Station'].includes(ship.status));
     return (
         <div className="border-white border-opacity-10 border ml-4 p-4 bg-sky-950 bg-opacity-25 aspect-square h-[70vh] w-[70vh]">
             <p>
@@ -42,7 +42,7 @@ export default function Radar() {
                         <div className={styles.circle + ' border-2 border-sky-400 rounded-full'}></div>
                         <div className={styles.circle + ' border-2 border-sky-400 rounded-full'}></div>
                         <span className={styles.station}>
-                            <div className="flex flex-col items-center justify-center w-min" style={{transform: `rotateZ(0deg) rotateY(${rotation.y * -1}deg) rotateX(${rotation.x * -1}deg)`}}>
+                            <div className={`${dragging ? '' : 'transition-all ease-linear duration-1000'} flex flex-col items-center justify-center w-min`} style={{transform: `rotateZ(0deg) rotateY(${rotation.y * -1}deg) rotateX(${rotation.x * -1}deg)`}}>
                                 Stargazer
                                 <Icon className="h-[6vh] w-[6vh]" name="asteroid_station"></Icon>
                             </div>
@@ -50,18 +50,60 @@ export default function Radar() {
                         {
                             filteredShips?.map(ship => {
                                 if (!positions[ship.id]) {
-                                    const getRandomPosition = () => (10 + (Math.random() * 80)) * (Math.random() >= 0.5 ? -1 : 1);
+                                    const getRandomValue = (min: number, max: number) => (min + (Math.random() * (max - min))) * (Math.random() >= 0.5 ? -1 : 1);
+                                    const getRandomCoord = (random: number, winners: number[], min1: number, min2: number, max1: number, max2: number) => (
+                                        getRandomValue(
+                                            winners.includes(random) ? min2 : min1,
+                                            winners.includes(random) ? max2 : max1
+                                        )
+                                    );
+                                    const getRandomPosition = (min1: number, min2: number, max1: number, max2: number) => {
+                                        let random = Math.floor(Math.random() * 4);
+                                        return {
+                                            x: getRandomCoord(random, [0, 1], min1, min2, max1, max2),
+                                            y: getRandomCoord(random, [0, 2], min1, min2, max1, max2),
+                                            z: getRandomCoord(random, [0, 3], min1, min2, max1, max2) * 3
+                                        }
+                                    };
+                                    let far = getRandomPosition(0, 50, 20, 70);
+                                    let near = getRandomPosition(0, 2, 2, 4);
                                     positions[ship.id] = {
-                                        x: getRandomPosition(),
-                                        y: getRandomPosition(),
-                                        z: Math.random() * 300
+                                        from: ship.status === 'Exited Station' ? near : far,
+                                        to: ship.status === 'Exited Station' ? far : near,
+                                        ease: ship.status === 'Exited Station' ? 'ease-in' : 'ease-in-out',
+                                        duration: ship.statusDuration,
+                                        hasRendered: false,
+                                        isAnimating: false,
+                                        isStartingAnimation: false
                                     };
                                     setPositions(positions);
-                                    console.log({positions})
                                 }
-                                let {x,y,z} = positions[ship.id];
+                                let { from, to, ease, duration, hasRendered, isAnimating, isStartingAnimation } = positions[ship.id];
+                                let pos = from;
+                                if (hasRendered && !isStartingAnimation) {
+                                    window.setTimeout(() => {
+                                        positions[ship.id].isAnimating = true;
+                                        setPositions(positions);
+                                    }, 1000);
+                                    positions[ship.id].isStartingAnimation = true;
+                                    setPositions(positions);
+                                }
+                                if (isAnimating) {
+                                    pos = to;
+                                }
+                                if (!hasRendered) {
+                                    positions[ship.id].hasRendered = true;
+                                    setPositions(positions);
+                                }
+                                let getPos = (val: number) => `calc(calc(50% - 3rem) + ${val}%)`;
+                                let style = {
+                                    top: `${getPos(pos.x)}`,
+                                    left: `${getPos(pos.y)}`,
+                                    transform: `translateZ(${pos.z}px)`,
+                                    transition: `all ${duration}ms ${ease}`
+                                };
                                 return (
-                                    <span key={ship.id} className={`${styles.iconContainer} left-[${y}%] top-[${x}%] whitespace-nowrap`} style={{transform: `translateZ(${z}px)`}}>
+                                    <span key={ship.id} className={`${styles.iconContainer} whitespace-nowrap`} style={style}>
                                         <div className="flex flex-col items-center justify-center w-min" style={{transform: `rotateZ(0deg) rotateY(${rotation.y * -1}deg) rotateX(${rotation.x * -1}deg)`}}>
                                             {`${ship.craft.manufacturer?.shortName} ${ship.callsign}`}
                                             <Icon className="h-[5vh] w-[5vh]" name={ship.craft.iconName}></Icon>

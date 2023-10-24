@@ -92,8 +92,8 @@ class StationStoreState implements StationStore {
 
     private hasStartedActivities = false;
     private pity = {
-        arrival: 0,
-        departure: 0
+        arrival: 0.75,
+        departure: 0.75
     };
 
     startShipActivities(publish: NotificationsStore['publish']): boolean {
@@ -103,10 +103,10 @@ class StationStoreState implements StationStore {
         this.hasStartedActivities = true;
         window.setTimeout(() => {
             this.handleShipDeparture(publish);
-        }, 3000);
+        }, 2000);
         window.setTimeout(() => {
             this.handleShipArrival(publish);
-        }, 4000);
+        }, 3000);
         return true;
     }
 
@@ -126,24 +126,21 @@ class StationStoreState implements StationStore {
         permit.ship.status = 'Undocking';
         this.pads = [...this.pads];
         this.ships = [...this.ships];
-        console.log('set ships', this.ships);
         const name = `${permit.ship.captain} (${permit.ship.craft.manufacturer!.shortName} ${permit.ship.callsign})`;
         publish(new Notification({body: `${name} is departing pad ${departingPad.number}`}));
         window.setTimeout(() => {
             publish(new Notification({body: `${name} has departed pad ${departingPad.number}`}));
             permit.ship.status = 'Exited Station';
+            permit.ship.statusDuration = 10000 + (Math.random() * 20000);
             delete departingPad.permit!.ship.permit;
             delete departingPad.permit;
             this.pads = [...this.pads];
             this.ships = [...this.ships];
-            console.log('set ships', this.ships);
             window.setTimeout(() => {
                 permit.ship.status = 'Exited System';
-                this.ships = this.ships.filter(s => s.id !== permit.ship.id);
-                console.log('set ships', this.ships);
                 publish(new Notification({body: `${name} has exited the system.`}));
-            }, 10000 + (Math.random() * 20000));
-        }, 10000 + (Math.random() * 20000));
+            }, permit.ship.statusDuration);
+        }, 1000 + (Math.random() * 20000));
     }
 
     handleShipArrival(publish: NotificationsStore['publish']): void {
@@ -159,19 +156,24 @@ class StationStoreState implements StationStore {
         }
         const ship = createShip(this.pads);
         const status = ship.status;
-        ship.status = 'Docking';
+        ship.status = 'Entering Station';
+        ship.statusDuration = 10000 + (Math.random() * 30000);
         this.pads = [...this.pads];
         this.ships = [...this.ships, ship];
-        console.log('set ships (arrival)', this.ships);
         const name = `${ship.captain} (${ship.craft.manufacturer!.shortName} ${ship.callsign})`;
-        publish(new Notification({body: `${name} is arriving at pad ${ship.permit!.pad.number}`}));
+        publish(new Notification({body: `${name} is arriving and will dock at pad ${ship.permit!.pad.number}`}));
         window.setTimeout(() => {
-            publish(new Notification({body: `${name} has arrived at pad ${ship.permit!.pad.number}`}));
-            ship.status = status;
+            publish(new Notification({body: `${name} has arrived and is docking at pad ${ship.permit!.pad.number}`}));
+            ship.status = 'Docking';
             this.pads = [...this.pads];
             this.ships = [...this.ships];
-            console.log('set ships (arrival)', this.ships);
-        }, 10000 + (Math.random() * 30000));
+            window.setTimeout(() => {
+                publish(new Notification({body: `${name} has arrived at pad ${ship.permit!.pad.number}`}));
+                ship.status = status;
+                this.pads = [...this.pads];
+                this.ships = [...this.ships];
+            }, ship.statusDuration);
+        }, 10000 + (Math.random() * 20000));
     }
 }
 export const useStationStore: UseBoundStore<StoreApi<StationStore>> = createStore(set => {
