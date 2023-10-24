@@ -172,8 +172,8 @@ class StationStoreState implements StationStore {
                 ship.status = status;
                 this.pads = [...this.pads];
                 this.ships = [...this.ships];
-            }, ship.statusDuration);
-        }, 10000 + (Math.random() * 20000));
+            }, 10000 + (Math.random() * 20000));
+        }, ship.statusDuration);
     }
 }
 export const useStationStore: UseBoundStore<StoreApi<StationStore>> = createStore(set => {
